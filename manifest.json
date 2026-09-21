@@ -8,5 +8,7 @@
   "background_color": "#0E1116",
   "theme_color": "#0E1116",
   "lang": "fa",
-  "dir": "rtl"
+  "dir": "rtl",
+  "id": "trading-journal",
+  "description": "دفترچه معاملات شخصی"
 }
