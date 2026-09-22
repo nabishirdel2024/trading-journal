@@ -1,28 +1,1557 @@
-{
-  "name": "ژورنال معاملاتی",
-  "short_name": "ژورنال",
-  "description": "دفترچه معاملات شخصی",
-  "id": "trading-journal",
-  "start_url": "./index.html",
-  "scope": "./",
-  "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#0E1116",
-  "theme_color": "#0E1116",
-  "lang": "fa",
-  "dir": "rtl",
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    }
-  ]
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ژورنال معاملاتی</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0E1116">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ژورنال">
+<style>
+  :root{
+    --ink:#0E1116;
+    --panel:#161B23;
+    --panel-2:#1C222C;
+    --line:#2A313D;
+    --gold:#C9A14A;
+    --gold-dim:#8F7638;
+    --win:#3FC583;
+    --win-dim:#2C8A5C;
+    --loss:#E5544B;
+    --loss-dim:#A83A34;
+    --free:#6E7E8C;
+    --text:#EDE7D9;
+    --text-bright:#F6F1E4;
+    --text-dim:#9BA3AD;
+  }
+
+  *{ box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+
+  html,body{
+    margin:0; padding:0;
+    background:var(--ink);
+    color:var(--text);
+    font-family: 'Vazirmatn', Tahoma, sans-serif;
+    min-height:100vh;
+  }
+
+  body{
+    background-color: var(--ink);
+    background-image:
+      linear-gradient(rgba(201,161,74,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,161,74,0.045) 1px, transparent 1px),
+      radial-gradient(ellipse 900px 600px at 15% 0%, rgba(201,161,74,0.11), transparent 55%),
+      radial-gradient(ellipse 900px 600px at 100% 100%, rgba(229,84,75,0.08), transparent 55%),
+      radial-gradient(ellipse 1300px 900px at 50% 40%, rgba(0,0,0,0), rgba(0,0,0,0.45) 100%);
+    background-size: 32px 32px, 32px 32px, auto, auto, auto;
+    background-attachment: fixed;
+    background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat;
+  }
+
+  .wrap{ max-width: 720px; margin: 0 auto; padding: 22px 16px 60px; }
+
+  /* ---- top bar ---- */
+  .topbar{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+  }
+
+  .back-btn{
+    display:none;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    color: var(--text);
+    width: 38px; height: 38px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor:pointer;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .back-btn:hover{ border-color: var(--gold-dim); color: var(--gold); }
+
+  .lang-btn{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor:pointer;
+    flex-shrink:0;
+    font-family: 'Courier New', monospace;
+  }
+  .lang-btn:hover{ border-color: var(--gold-dim); color: var(--gold); }
+
+  .topbar h1{
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin:0;
+    flex:1;
+    color: var(--text-bright);
+    text-shadow: 0 0 24px rgba(201,161,74,0.18);
+  }
+
+  .topbar .sub{
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    font-family: 'Courier New', monospace;
+  }
+
+  .screen{ display:none; }
+  .screen.active{ display:block; }
+
+  /* ---- weeks list ---- */
+  .week-card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .week-card:hover{ border-color: var(--gold-dim); }
+  .week-card:active{ transform: scale(0.99); }
+
+  .week-card .wc-name{
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text-bright);
+  }
+
+  .week-card .wc-meta{
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-family: 'Courier New', monospace;
+  }
+
+  .week-card .wc-net{
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  .week-card .wc-net.pos{ color: var(--win); }
+  .week-card .wc-net.neg{ color: var(--loss); }
+  .week-card .wc-net.zero{ color: var(--text-dim); }
+
+  .week-card .wc-chev{
+    color: var(--text-dim);
+    font-size: 1.2rem;
+    margin-inline-start: 10px;
+  }
+
+  .wc-del{
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    padding: 6px 10px;
+    height: 30px;
+    border-radius: 7px;
+    font-size: 0.72rem;
+    font-family: inherit;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+    display:flex; align-items:center; justify-content:center;
+    margin-inline-start: 8px;
+  }
+  .wc-del:hover{ color: var(--loss); border-color: var(--loss-dim); }
+
+  .add-week-btn{
+    width:100%;
+    background: none;
+    border: 1px dashed var(--line);
+    color: var(--text-dim);
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    cursor:pointer;
+    font-family: inherit;
+    margin-top: 6px;
+  }
+  .add-week-btn:hover{ color: var(--gold); border-color: var(--gold-dim); }
+
+  .empty-weeks{
+    text-align:center;
+    color: var(--text-dim);
+    padding: 50px 20px;
+    font-size: 0.9rem;
+    line-height: 1.9;
+  }
+
+  /* ---- tab bar ---- */
+  .tab-bar{
+    display:flex;
+    gap: 6px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 16px;
+  }
+  .tab-bar button{
+    flex:1;
+    background:none;
+    border:none;
+    color: var(--text-dim);
+    padding: 9px 0;
+    border-radius: 7px;
+    font-size: 0.85rem;
+    font-family: inherit;
+    cursor:pointer;
+  }
+  .tab-bar button.active{
+    background: var(--gold);
+    color: #14171C;
+    font-weight: 700;
+  }
+
+  /* ---- month cards ---- */
+  .month-card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .month-card:hover{ border-color: var(--gold-dim); }
+  .month-card:active{ transform: scale(0.99); }
+  .month-card .mc-name{ font-size: 1rem; font-weight: 700; margin-bottom: 6px; color: var(--text-bright); }
+  .month-card .mc-meta{ font-size: 0.75rem; color: var(--text-dim); font-family: 'Courier New', monospace; }
+
+  .included-week-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    cursor:pointer;
+  }
+  .included-week-row:last-child{ border-bottom:none; }
+  .included-week-row .iw-name{ font-size: 0.85rem; color: var(--text-bright); }
+  .included-week-row .iw-net{ font-family:'Courier New', monospace; font-weight:700; font-size: 0.88rem; }
+
+  /* ---- section cards (detail view) ---- */
+  .section{
+    background: linear-gradient(155deg, var(--panel) 0%, #131820 100%);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  }
+
+  .section-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom: 14px;
+  }
+
+  .section-head .title{
+    font-size: 0.88rem;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  .section-head .action{
+    background:none;
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    font-size: 0.7rem;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor:pointer;
+    font-family: inherit;
+  }
+  .section-head .action:hover{ color: var(--loss); border-color: var(--loss-dim); }
+
+  .field{ margin-bottom: 12px; }
+  .field:last-child{ margin-bottom:0; }
+
+  .field label{
+    display:block;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+
+  .field select, .field input{
+    width:100%;
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    color: var(--text);
+    padding: 11px 12px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-family: inherit;
+  }
+  .field select:focus, .field input:focus{ outline:none; border-color: var(--gold-dim); }
+  .field input[type=number]{ font-family: 'Courier New', monospace; }
+  .field input::placeholder{ color: rgba(155,163,173,0.5); }
+
+  .row2{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .capital-display{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background: var(--panel-2);
+    border-radius: 6px;
+    padding: 14px;
+    margin-top: 12px;
+  }
+  .capital-display .cd-label{ font-size: 0.75rem; color: var(--text-dim); }
+  .capital-display .cd-value{ font-family:'Courier New', monospace; font-size: 1.15rem; font-weight:700; }
+  .capital-display .cd-value.pos{ color: var(--win); }
+  .capital-display .cd-value.neg{ color: var(--loss); }
+
+  button.primary-btn{
+    width:100%;
+    background: var(--gold);
+    color: #14171C;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor:pointer;
+    font-family: inherit;
+    margin-top: 4px;
+  }
+  button.primary-btn:hover{ background:#D8B663; }
+  button.primary-btn:active{ transform: translateY(1px); }
+
+  .hint{ font-size: 0.7rem; color: var(--text-dim); margin-top: 10px; line-height:1.7; }
+
+  /* ---- toggle groups ---- */
+  .toggle-group{
+    display:grid;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .toggle-group.g3{ grid-template-columns: repeat(3, 1fr); }
+  .toggle-group.g2{ grid-template-columns: repeat(2, 1fr); }
+
+  .toggle-btn{
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    padding: 12px 6px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor:pointer;
+    font-family: inherit;
+    transition: all 0.12s ease;
+  }
+  .toggle-btn.active.win{ background: rgba(63,197,131,0.16); border-color: var(--win); color: var(--win); }
+  .toggle-btn.active.loss{ background: rgba(229,84,75,0.16); border-color: var(--loss); color: var(--loss); }
+  .toggle-btn.active.free{ background: rgba(110,126,140,0.16); border-color: var(--free); color: var(--free); }
+  .toggle-btn.active.long{ background: rgba(63,197,131,0.16); border-color: var(--win); color: var(--win); }
+  .toggle-btn.active.short{ background: rgba(229,84,75,0.16); border-color: var(--loss); color: var(--loss); }
+
+  /* ---- collapsible details ---- */
+  details.more-details{ margin-bottom: 12px; }
+  details.more-details summary{
+    cursor:pointer;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    padding: 8px 0;
+    list-style:none;
+    display:flex;
+    align-items:center;
+    gap: 6px;
+  }
+  details.more-details summary::-webkit-details-marker{ display:none; }
+  details.more-details summary::before{ content:'+'; font-size: 1rem; color: var(--gold-dim); }
+  details.more-details[open] summary::before{ content:'−'; }
+  details.more-details:hover summary{ color: var(--text); }
+  details.more-details .more-body{ padding-top: 6px; }
+
+  /* ---- stats ---- */
+  .stats-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stat{
+    background: var(--panel-2);
+    border-radius: 6px;
+    padding: 14px;
+  }
+  .stat .label{ font-size: 0.68rem; color: var(--text-dim); margin-bottom: 8px; }
+  .stat .value{ font-family: 'Courier New', monospace; font-size: 1.3rem; font-weight: 700; line-height:1; }
+  .stat .value.pos{ color: var(--win); }
+  .stat .value.neg{ color: var(--loss); }
+  .stat .sub{ font-size: 0.66rem; color: var(--text-dim); margin-top: 6px; font-family: 'Courier New', monospace; }
+  .stat.wide{ grid-column: span 2; }
+
+  /* ---- chart ---- */
+  .chart-wrap{ position:relative; }
+  .chart-empty{
+    text-align:center; color: var(--text-dim); font-size: 0.82rem; padding: 40px 0;
+  }
+  svg.equity-chart{ width:100%; height:auto; display:block; }
+  .chart-legend{
+    display:flex; justify-content:space-between;
+    font-size: 0.68rem; color: var(--text-dim);
+    margin-top: 8px; font-family: 'Courier New', monospace;
+  }
+
+  /* ---- meter ---- */
+  .meter .row{ display:flex; align-items:center; gap: 10px; margin-bottom: 9px; }
+  .meter .row:last-child{ margin-bottom:0; }
+  .meter .tag{ width: 66px; font-size: 0.72rem; color: var(--text-dim); flex-shrink:0; }
+  .meter .track{ flex:1; height: 9px; background: var(--panel-2); border-radius: 5px; overflow:hidden; }
+  .meter .fill{ height:100%; border-radius: 5px; transition: width 0.4s ease; }
+  .meter .fill.win{ background: var(--win); }
+  .meter .fill.loss{ background: var(--loss); }
+  .meter .fill.free{ background: var(--free); }
+  .meter .count{ width: 34px; text-align:left; font-family:'Courier New', monospace; font-size: 0.78rem; color: var(--text-dim); }
+
+  /* ---- table ---- */
+  table{ width:100%; border-collapse: collapse; font-size: 0.82rem; }
+  th{ text-align:right; font-size: 0.66rem; color: var(--text-dim); font-weight: 500; padding: 7px 5px; border-bottom: 1px solid var(--line); }
+  td{ padding: 9px 5px; border-bottom: 1px solid var(--line); font-family: 'Courier New', monospace; }
+  tr:last-child td{ border-bottom:none; }
+
+  .badge{ display:inline-block; padding: 2px 9px; border-radius: 20px; font-size: 0.7rem; font-family: 'Vazirmatn', sans-serif; }
+  .badge.win{ background: rgba(63,197,131,0.15); color: var(--win); }
+  .badge.loss{ background: rgba(229,84,75,0.15); color: var(--loss); }
+  .badge.free{ background: rgba(110,126,140,0.15); color: var(--free); }
+
+  .del{ background:none; border:none; color: var(--text-dim); cursor:pointer; font-size: 0.85rem; }
+  .del:hover{ color: var(--loss); }
+
+  .empty{ text-align:center; color: var(--text-dim); padding: 24px 0; font-size: 0.82rem; }
+
+  .status{ font-size: 0.68rem; color: var(--text-dim); text-align:center; margin-top: 14px; font-family: 'Courier New', monospace; height: 14px; }
+
+  .rename-input{
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed var(--line);
+    color: var(--text);
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-family: inherit;
+    width: 100%;
+    padding: 2px 0;
+  }
+  .rename-input:focus{ outline:none; border-color: var(--gold-dim); }
+
+  /* ---- image upload ---- */
+  .img-drop{
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    padding: 14px;
+    text-align:center;
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    cursor:pointer;
+    position:relative;
+  }
+  .img-drop:hover{ border-color: var(--gold-dim); color: var(--gold); }
+  .img-drop input[type=file]{
+    position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%;
+  }
+  .img-preview{
+    margin-top: 10px;
+    display:flex;
+    align-items:center;
+    gap: 10px;
+  }
+  .img-preview img{
+    width: 56px; height: 56px; object-fit:cover;
+    border-radius: 6px; border: 1px solid var(--line);
+  }
+  .img-preview button{
+    background:none; border: 1px solid var(--line); color: var(--text-dim);
+    font-size: 0.7rem; padding: 5px 10px; border-radius: 6px; cursor:pointer; font-family:inherit;
+  }
+  .img-preview button:hover{ color: var(--loss); border-color: var(--loss-dim); }
+
+  /* ---- trade cards ---- */
+  .trade-card{
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    display:flex;
+    gap: 12px;
+    align-items:flex-start;
+  }
+  .trade-card:last-child{ margin-bottom:0; }
+
+  .trade-thumb{
+    width: 52px; height: 52px;
+    border-radius: 6px;
+    object-fit: cover;
+    flex-shrink:0;
+    cursor:pointer;
+    border: 1px solid var(--line);
+  }
+  .trade-thumb-empty{
+    width: 52px; height: 52px;
+    border-radius: 6px;
+    flex-shrink:0;
+    background: var(--panel);
+    border: 1px dashed var(--line);
+  }
+
+  .trade-info{ flex:1; min-width:0; }
+  .trade-top{ display:flex; align-items:center; justify-content:space-between; gap: 8px; margin-bottom: 4px; }
+  .trade-r{ font-family:'Courier New', monospace; font-weight:700; font-size: 0.95rem; }
+  .trade-r.pos{ color: var(--win); }
+  .trade-r.neg{ color: var(--loss); }
+  .trade-note{ font-size: 0.8rem; color: var(--text-bright); margin-bottom: 3px; }
+  .trade-times{ font-size: 0.68rem; color: var(--text-dim); font-family:'Courier New', monospace; }
+  .trade-actions{ display:flex; flex-direction:column; align-items:center; gap:6px; }
+
+  /* ---- image lightbox ---- */
+  .lightbox{
+    display:none;
+    position:fixed; inset:0;
+    background: rgba(6,8,11,0.92);
+    z-index: 999;
+    align-items:center; justify-content:center;
+    padding: 24px;
+  }
+  .lightbox.active{ display:flex; }
+  .lightbox img{
+    max-width:100%; max-height:85vh;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+  }
+  .lightbox-close{
+    position:absolute; top:18px; left:18px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    color: var(--text);
+    width: 38px; height: 38px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor:pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <button class="back-btn" id="backBtn" onclick="handleBack()">←</button>
+    <div style="flex:1;">
+      <h1 id="screenTitle" data-i18n="appTitle">ژورنال معاملاتی</h1>
+      <div class="sub" id="dateNow"></div>
+    </div>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
+  </div>
+
+  <!-- ===== SCREEN 1: WEEKS LIST ===== -->
+  <div class="screen active" id="screen-weeks">
+    <div class="tab-bar">
+      <button id="tabWeeksBtn" class="active" onclick="switchTab('weeks')" data-i18n="tabWeeks">هفته‌ها</button>
+      <button id="tabMonthsBtn" onclick="switchTab('months')" data-i18n="tabMonths">برآیند ماهانه</button>
+    </div>
+    <div id="weeksList"></div>
+    <button class="add-week-btn" id="addWeekBtn" onclick="addWeek()" data-i18n="addWeekBtn">+ افزودن هفته جدید</button>
+    <div id="monthsList" style="display:none;"></div>
+  </div>
+
+  <!-- ===== SCREEN 3: MONTH DETAIL ===== -->
+  <div class="screen" id="screen-month">
+    <div class="section">
+      <div class="section-head"><div class="title" id="monthTitle" data-i18n="tabMonths">برآیند ماهانه</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="title" data-i18n="winRateReward">وین ریت و ریوارد</div></div>
+      <div class="stats-grid" id="monthStatsGrid"></div>
+      <div class="meter" style="margin-top:14px;">
+        <div class="row">
+          <div class="tag" data-i18n="win">سود</div>
+          <div class="track"><div class="fill win" id="monthBarWin"></div></div>
+          <div class="count" id="monthCntWin">0</div>
+        </div>
+        <div class="row">
+          <div class="tag" data-i18n="loss">ضرر</div>
+          <div class="track"><div class="fill loss" id="monthBarLoss"></div></div>
+          <div class="count" id="monthCntLoss">0</div>
+        </div>
+        <div class="row">
+          <div class="tag" data-i18n="riskFree">ریسک‌فری</div>
+          <div class="track"><div class="fill free" id="monthBarFree"></div></div>
+          <div class="count" id="monthCntFree">0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="title" data-i18n="monthChartTitle">نمودار برآیند ماه</div></div>
+      <div class="chart-wrap" id="monthChartWrap"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="title" data-i18n="includedWeeksTitle">هفته‌های شامل این ماه</div></div>
+      <div id="includedWeeksList"></div>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 2: WEEK DETAIL ===== -->
+  <div class="screen" id="screen-detail">
+
+    <div class="section">
+      <div class="section-head">
+        <input class="rename-input" id="weekNameInput" onchange="renameWeek(this.value)">
+        <button class="action" onclick="deleteWeek()" data-i18n="deleteWeek">حذف هفته</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="title" data-i18n="capitalTitle">سرمایه</div></div>
+      <div class="row2">
+        <div class="field">
+          <label data-i18n="initialCapital">سرمایه اولیه</label>
+          <input type="number" id="capitalInput" placeholder="e.g. 1000" data-i18n-placeholder="egCapital" onchange="updateCapital()">
+        </div>
+        <div class="field">
+          <label data-i18n="riskPerTrade">ریسک هر معامله (٪)</label>
+          <input type="number" id="riskPctInput" step="0.1" placeholder="e.g. 1" data-i18n-placeholder="egRisk" onchange="updateCapital()">
+        </div>
+      </div>
+      <div class="capital-display">
+        <div class="cd-label" data-i18n="estimatedCapital">سرمایه تخمینی فعلی</div>
+        <div class="cd-value" id="capitalNow">—</div>
+      </div>
+      <div class="hint" data-i18n="capitalHint">تخمین بدون احتساب کامپوند شدن — صرفاً بر اساس مجموع R و درصد ریسک هر معامله محاسبه می‌شه.</div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="title" data-i18n="winRateReward">وین ریت و ریوارد</div></div>
+      <div class="stats-grid" id="statsGrid"></div>
+      <div class="meter" style="margin-top:14px;">
+        <div class="row">
+          <div class="tag" data-i18n="win">سود</div>
+          <div class="track"><div class="fill win" id="barWin"></div></div>
+          <div class="count" id="cntWin">0</div>
+        </div>
+        <div class="row">
+          <div class="tag" data-i18n="loss">ضرر</div>
+          <div class="track"><div class="fill loss" id="barLoss"></div></div>
+          <div class="count" id="cntLoss">0</div>
+        </div>
+        <div class="row">
+          <div class="tag" data-i18n="riskFree">ریسک‌فری</div>
+          <div class="track"><div class="fill free" id="barFree"></div></div>
+          <div class="count" id="cntFree">0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="title" data-i18n="weekChartTitle">نمودار برآیند هفته</div></div>
+      <div class="chart-wrap" id="chartWrap"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="title" data-i18n="addTradeTitle">افزودن معامله</div></div>
+
+      <div class="field">
+        <label data-i18n="resultLabel">نتیجه</label>
+        <div class="toggle-group g3" id="resultToggle">
+          <button type="button" class="toggle-btn win" onclick="selectResult('win', this)" data-i18n="resultWin">سود</button>
+          <button type="button" class="toggle-btn loss" onclick="selectResult('loss', this)" data-i18n="resultLoss">ضرر</button>
+          <button type="button" class="toggle-btn free" onclick="selectResult('free', this)" data-i18n="riskFree">فری</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label data-i18n="directionLabel">جهت معامله</label>
+        <div class="toggle-group g2" id="directionToggle">
+          <button type="button" class="toggle-btn long" onclick="selectDirection('long', this)" data-i18n="long">لانگ</button>
+          <button type="button" class="toggle-btn short" onclick="selectDirection('short', this)" data-i18n="short">سل</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label data-i18n="rewardLabel">ریوارد (R)</label>
+        <input type="number" id="rValue" step="0.1" placeholder="e.g. 4.2" data-i18n-placeholder="egReward">
+      </div>
+
+      <details class="more-details">
+        <summary data-i18n="moreDetails">جزئیات بیشتر (یادداشت، زمان، عکس)</summary>
+        <div class="more-body">
+          <div class="field">
+            <label data-i18n="noteLabel">یادداشت (اختیاری)</label>
+            <input type="text" id="note" placeholder="XAUUSD">
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label data-i18n="entryTimeLabel">زمان ورود</label>
+              <input type="datetime-local" id="entryTime">
+            </div>
+            <div class="field">
+              <label data-i18n="exitTimeLabel">زمان خروج</label>
+              <input type="datetime-local" id="exitTime">
+            </div>
+          </div>
+          <div class="field">
+            <label data-i18n="imageLabel">تصویر معامله (اختیاری)</label>
+            <div class="img-drop" id="imgDropZone">
+              <span id="imgDropText" data-i18n="chooseImage">📷 انتخاب عکس از گالری</span>
+              <input type="file" accept="image/*" id="imgInput" onchange="handleImageSelect(event)">
+            </div>
+            <div class="img-preview" id="imgPreview" style="display:none;">
+              <img id="imgPreviewThumb">
+              <button type="button" onclick="clearImageSelect()" data-i18n="removeImage">حذف عکس</button>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <button class="primary-btn" onclick="addTrade()" data-i18n="submitTrade">ثبت معامله</button>
+      <div class="hint" data-i18n="lossHint">برای معامله ضرر، فقط عدد ریسک رو مثبت وارد کن (مثلا ۱) — خودش به‌صورت ۱- R حساب می‌شه.</div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <div class="title" data-i18n="tradeListTitle">لیست معاملات</div>
+        <button class="action" onclick="resetWeekTrades()" data-i18n="clearAll">پاک کردن همه</button>
+      </div>
+      <div id="tradeCards"></div>
+      <div class="empty" id="emptyMsg" style="display:none;" data-i18n="noTradesYet">هنوز معامله‌ای ثبت نشده</div>
+    </div>
+
+  </div>
+
+  <div class="status" id="statusMsg"></div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+  <img id="lightboxImg" src="">
+</div>
+
+<script>
+const I18N = {
+  fa: {
+    appTitle: 'ژورنال معاملاتی',
+    tabWeeks: 'هفته‌ها',
+    tabMonths: 'برآیند ماهانه',
+    addWeekBtn: '+ افزودن هفته جدید',
+    winRateReward: 'وین ریت و ریوارد',
+    win: 'سود',
+    loss: 'ضرر',
+    resultWin: 'سود',
+    resultLoss: 'ضرر',
+    riskFree: 'ریسک‌فری',
+    monthChartTitle: 'نمودار برآیند ماه',
+    includedWeeksTitle: 'هفته‌های شامل این ماه',
+    deleteWeek: 'حذف هفته',
+    capitalTitle: 'سرمایه',
+    initialCapital: 'سرمایه اولیه',
+    riskPerTrade: 'ریسک هر معامله (٪)',
+    estimatedCapital: 'سرمایه تخمینی فعلی',
+    capitalHint: 'تخمین بدون احتساب کامپوند شدن — صرفاً بر اساس مجموع R و درصد ریسک هر معامله محاسبه می‌شه.',
+    weekChartTitle: 'نمودار برآیند هفته',
+    addTradeTitle: 'افزودن معامله',
+    resultLabel: 'نتیجه',
+    directionLabel: 'جهت معامله',
+    long: 'لانگ',
+    short: 'سل',
+    rewardLabel: 'ریوارد (R)',
+    moreDetails: 'جزئیات بیشتر (یادداشت، زمان، عکس)',
+    noteLabel: 'یادداشت (اختیاری)',
+    entryTimeLabel: 'زمان ورود',
+    exitTimeLabel: 'زمان خروج',
+    imageLabel: 'تصویر معامله (اختیاری)',
+    chooseImage: '📷 انتخاب عکس از گالری',
+    imageSelected: '✓ عکس انتخاب شد',
+    removeImage: 'حذف عکس',
+    submitTrade: 'ثبت معامله',
+    lossHint: 'برای معامله ضرر، فقط عدد ریسک رو مثبت وارد کن (مثلا ۱) — خودش به‌صورت ۱- R حساب می‌شه.',
+    tradeListTitle: 'لیست معاملات',
+    clearAll: 'پاک کردن همه',
+    noTradesYet: 'هنوز معامله‌ای ثبت نشده',
+    egCapital: 'مثلا 1000',
+    egRisk: 'مثلا 1',
+    egReward: 'مثلا 4.2',
+    winRateLabel: 'وین ریت',
+    netOutcome: 'برآیند خالص',
+    tradesRecorded: 'معامله ثبت شده',
+    avgWin: 'میانگین سود',
+    avgLoss: 'میانگین ضرر',
+    sum: 'مجموع',
+    expectancyLabel: 'Expectancy (هر معامله)',
+    expectancySub: 'میانگین بازده مورد انتظار به ازای هر معامله',
+    noMonthlyData: 'هنوز داده‌ای برای برآیند ماهانه نیست',
+    noDataFound: 'داده‌ای یافت نشد',
+    noWeeksYet: 'هنوز هیچ هفته‌ای ثبت نشده',
+    createFirstWeek: 'با دکمه پایین اولین هفته رو بساز',
+    tradesUnit: 'معامله',
+    weeksUnit: 'هفته',
+    newWeekPrompt: 'نام هفته جدید:',
+    weekLabelDefault: 'هفته',
+    keepAtLeastOneWeek: 'حداقل باید یک هفته باقی بمونه',
+    confirmDeleteWeek: (label) => `هفته «${label}» و همه معاملاتش پاک بشه؟`,
+    confirmClearTrades: 'همه معاملات این هفته پاک بشه؟',
+    invalidReward: 'لطفا ریوارد معتبر (بزرگتر از صفر) برای معامله سود وارد کن',
+    imageLoadError: 'خطا در بارگذاری عکس',
+    savedStatus: 'ذخیره شد',
+    saveError: 'خطا در ذخیره‌سازی',
+    delete: 'حذف',
+    chartEmpty: 'با ثبت اولین معامله، نمودار برآیند اینجا ظاهر می‌شه',
+    chartStart: 'شروع: 0R',
+    entry: 'ورود',
+    exit: 'خروج',
+  },
+  en: {
+    appTitle: 'Trading Journal',
+    tabWeeks: 'Weeks',
+    tabMonths: 'Monthly Outcome',
+    addWeekBtn: '+ Add New Week',
+    winRateReward: 'Win Rate & Reward',
+    win: 'TP',
+    loss: 'SL',
+    resultWin: 'TP',
+    resultLoss: 'SL',
+    riskFree: 'Free',
+    monthChartTitle: 'Monthly Outcome Chart',
+    includedWeeksTitle: 'Weeks Included This Month',
+    deleteWeek: 'Delete Week',
+    capitalTitle: 'Capital',
+    initialCapital: 'Initial Capital',
+    riskPerTrade: 'Risk per Trade (%)',
+    estimatedCapital: 'Estimated Current Capital',
+    capitalHint: 'Estimate without compounding — calculated only from total R and risk % per trade.',
+    weekChartTitle: 'Weekly Outcome Chart',
+    addTradeTitle: 'Add Trade',
+    resultLabel: 'Result',
+    directionLabel: 'Direction',
+    long: 'Long',
+    short: 'Short',
+    rewardLabel: 'Reward (R)',
+    moreDetails: 'More details (note, time, image)',
+    noteLabel: 'Note (optional)',
+    entryTimeLabel: 'Entry Time',
+    exitTimeLabel: 'Exit Time',
+    imageLabel: 'Trade Image (optional)',
+    chooseImage: '📷 Choose photo from gallery',
+    imageSelected: '✓ Photo selected',
+    removeImage: 'Remove Photo',
+    submitTrade: 'Save Trade',
+    lossHint: 'For a losing trade, just enter the risk as a positive number (e.g. 1) — it\'s automatically counted as -1R.',
+    tradeListTitle: 'Trade List',
+    clearAll: 'Clear All',
+    noTradesYet: 'No trades recorded yet',
+    egCapital: 'e.g. 1000',
+    egRisk: 'e.g. 1',
+    egReward: 'e.g. 4.2',
+    winRateLabel: 'Win Rate',
+    netOutcome: 'Net Outcome',
+    tradesRecorded: 'trades recorded',
+    avgWin: 'Avg TP',
+    avgLoss: 'Avg SL',
+    sum: 'Sum',
+    expectancyLabel: 'Expectancy (per trade)',
+    expectancySub: 'Average expected return per trade',
+    noMonthlyData: 'No data yet for a monthly outcome',
+    noDataFound: 'No data found',
+    noWeeksYet: 'No weeks recorded yet',
+    createFirstWeek: 'Use the button below to create your first week',
+    tradesUnit: 'trades',
+    weeksUnit: 'weeks',
+    newWeekPrompt: 'New week name:',
+    weekLabelDefault: 'Week',
+    keepAtLeastOneWeek: 'At least one week must remain',
+    confirmDeleteWeek: (label) => `Delete week "${label}" and all its trades?`,
+    confirmClearTrades: 'Clear all trades for this week?',
+    invalidReward: 'Please enter a valid reward (greater than zero) for a winning trade',
+    imageLoadError: 'Error loading image',
+    savedStatus: 'Saved',
+    saveError: 'Error saving',
+    delete: 'Delete',
+    chartEmpty: 'Once you log your first trade, the outcome chart will appear here',
+    chartStart: 'Start: 0R',
+    entry: 'In',
+    exit: 'Out',
+  }
+};
+
+let lang = localStorage.getItem('journal-lang') || 'fa';
+
+function t(key){
+  const v = I18N[lang][key];
+  return v === undefined ? key : v;
 }
+
+function applyStaticText(){
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+  document.body.style.fontFamily = lang === 'fa'
+    ? "'Vazirmatn', Tahoma, sans-serif"
+    : "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+  document.getElementById('langBtn').textContent = lang === 'fa' ? 'EN' : 'فا';
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = t(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
+  });
+  document.getElementById('dateNow').textContent = lang === 'fa'
+    ? new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year:'numeric', month:'long', day:'numeric' }).format(new Date())
+    : new Intl.DateTimeFormat('en-US', { year:'numeric', month:'long', day:'numeric' }).format(new Date());
+}
+
+function toggleLang(){
+  lang = lang === 'fa' ? 'en' : 'fa';
+  localStorage.setItem('journal-lang', lang);
+  applyStaticText();
+  if(document.getElementById('screen-detail').classList.contains('active')){
+    renderDetail();
+  } else if(document.getElementById('screen-month').classList.contains('active')){
+    const months = groupWeeksByMonth();
+    const m = months.find(x => x.weeks.some(w => w.id === activeMonthAnchorId));
+    activeMonthKey = m ? m.key : null;
+    document.getElementById('screenTitle').textContent = m ? m.label : t('tabMonths');
+    document.getElementById('monthTitle').textContent = m ? m.label : t('tabMonths');
+    renderMonthDetail(m);
+  } else {
+    switchTab(activeTab);
+  }
+}
+
+let weeks = [];
+let activeWeekId = null;
+let activeTab = 'weeks';
+let activeMonthKey = null;
+let activeMonthAnchorId = null;
+let backTo = 'home-weeks';
+const STORAGE_KEY = 'trading-journal-weeks';
+const OLD_STORAGE_KEY = 'trading-journal-trades';
+
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+
+function activeWeek(){ return weeks.find(w => w.id === activeWeekId); }
+function currentTrades(){ const w = activeWeek(); return w ? w.trades : []; }
+
+async function loadTrades(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      weeks = JSON.parse(raw);
+    } else {
+      const oldRaw = localStorage.getItem(OLD_STORAGE_KEY);
+      const oldTrades = oldRaw ? JSON.parse(oldRaw) : [];
+      weeks = [{ id: uid(), label: `${t('weekLabelDefault')} 1`, trades: oldTrades, capital: null, riskPct: 1, createdAt: Date.now() }];
+    }
+  }catch(e){ weeks = []; }
+  if(weeks.length === 0){
+    weeks = [{ id: uid(), label: `${t('weekLabelDefault')} 1`, trades: [], capital: null, riskPct: 1, createdAt: Date.now() }];
+  }
+  weeks.forEach(w => {
+    if(w.capital === undefined) w.capital = null;
+    if(w.riskPct === undefined) w.riskPct = 1;
+    if(w.createdAt === undefined) w.createdAt = Date.now();
+  });
+  saveTrades(true);
+  renderWeeksList();
+}
+
+async function saveTrades(silent){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(weeks));
+    if(!silent) setStatus(t('savedStatus'));
+  }catch(e){
+    setStatus(t('saveError'));
+  }
+}
+
+function setStatus(msg){
+  const el = document.getElementById('statusMsg');
+  el.textContent = msg;
+  setTimeout(()=>{ if(el.textContent===msg) el.textContent=''; }, 1400);
+}
+
+/* ---------- navigation ---------- */
+function goHome(tab){
+  activeWeekId = null;
+  activeMonthKey = null;
+  document.getElementById('screen-weeks').classList.add('active');
+  document.getElementById('screen-detail').classList.remove('active');
+  document.getElementById('screen-month').classList.remove('active');
+  document.getElementById('backBtn').style.display = 'none';
+  document.getElementById('screenTitle').textContent = t('appTitle');
+  switchTab(tab || 'weeks');
+}
+
+function handleBack(){
+  if(backTo.startsWith('month:')){
+    openMonth(backTo.split(':')[1]);
+  } else if(backTo === 'home-months'){
+    goHome('months');
+  } else {
+    goHome('weeks');
+  }
+}
+
+function switchTab(tab){
+  activeTab = tab;
+  document.getElementById('tabWeeksBtn').classList.toggle('active', tab==='weeks');
+  document.getElementById('tabMonthsBtn').classList.toggle('active', tab==='months');
+  document.getElementById('weeksList').style.display = tab==='weeks' ? 'block' : 'none';
+  document.getElementById('addWeekBtn').style.display = tab==='weeks' ? 'block' : 'none';
+  document.getElementById('monthsList').style.display = tab==='months' ? 'block' : 'none';
+  if(tab==='weeks') renderWeeksList(); else renderMonthsList();
+}
+
+function openWeek(id, from){
+  activeWeekId = id;
+  backTo = (from === 'month' && activeMonthKey) ? ('month:' + activeMonthKey) : 'home-weeks';
+  document.getElementById('screen-weeks').classList.remove('active');
+  document.getElementById('screen-month').classList.remove('active');
+  document.getElementById('screen-detail').classList.add('active');
+  document.getElementById('backBtn').style.display = 'flex';
+  const w = activeWeek();
+  document.getElementById('screenTitle').textContent = w.label;
+  resetTradeForm();
+  renderDetail();
+}
+
+/* ---------- months ---------- */
+function monthKeyOf(w){
+  const d = new Date(w.createdAt || Date.now());
+  if(lang === 'fa'){
+    const parts = new Intl.DateTimeFormat('fa-IR-u-ca-persian-nu-latn', { year:'numeric', month:'2-digit' }).formatToParts(d);
+    const y = parts.find(p=>p.type==='year').value;
+    const m = parts.find(p=>p.type==='month').value;
+    return `fa-${y}-${m}`;
+  }
+  return `en-${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+}
+function monthLabelOf(w){
+  const d = new Date(w.createdAt || Date.now());
+  return lang === 'fa'
+    ? new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year:'numeric', month:'long' }).format(d)
+    : new Intl.DateTimeFormat('en-US', { year:'numeric', month:'long' }).format(d);
+}
+
+function groupWeeksByMonth(){
+  const map = {};
+  weeks.forEach(w => {
+    const key = monthKeyOf(w);
+    if(!map[key]) map[key] = { key, label: monthLabelOf(w), weeks: [] };
+    map[key].weeks.push(w);
+  });
+  return Object.values(map).sort((a,b) => b.key.localeCompare(a.key));
+}
+
+function renderMonthsList(){
+  const container = document.getElementById('monthsList');
+  const months = groupWeeksByMonth();
+  if(months.length === 0){
+    container.innerHTML = `<div class="empty-weeks">${t('noMonthlyData')}</div>`;
+    return;
+  }
+  container.innerHTML = months.map(m => {
+    const trades = m.weeks.flatMap(w => w.trades);
+    const s = computeStats(trades);
+    const netClass = s.countable===0 ? 'zero' : (s.netR>=0?'pos':'neg');
+    const netText = s.countable===0 ? '—' : (s.netR>=0?'+':'')+s.netR.toFixed(2)+'R';
+    return `<div class="month-card" onclick="openMonth('${m.key}')">
+      <div>
+        <div class="mc-name">${m.label}</div>
+        <div class="mc-meta">${m.weeks.length} ${t('weeksUnit')} &nbsp;•&nbsp; ${trades.length} ${t('tradesUnit')} &nbsp;•&nbsp; ${t('winRateLabel')} ${s.countable? s.winRate.toFixed(0)+'%':'—'}</div>
+      </div>
+      <div style="display:flex; align-items:center;">
+        <div class="wc-net ${netClass}">${netText}</div>
+        <div class="wc-chev">‹</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openMonth(key){
+  activeMonthKey = key;
+  activeWeekId = null;
+  backTo = 'home-months';
+  document.getElementById('screen-weeks').classList.remove('active');
+  document.getElementById('screen-detail').classList.remove('active');
+  document.getElementById('screen-month').classList.add('active');
+  document.getElementById('backBtn').style.display = 'flex';
+  const months = groupWeeksByMonth();
+  const m = months.find(x => x.key === key);
+  activeMonthAnchorId = m && m.weeks.length ? m.weeks[0].id : null;
+  const label = m ? m.label : t('tabMonths');
+  document.getElementById('screenTitle').textContent = label;
+  document.getElementById('monthTitle').textContent = label;
+  renderMonthDetail(m);
+}
+
+function renderMonthDetail(m){
+  if(!m){
+    document.getElementById('monthStatsGrid').innerHTML = '';
+    document.getElementById('includedWeeksList').innerHTML = `<div class="empty">${t('noDataFound')}</div>`;
+    return;
+  }
+  const trades = m.weeks.flatMap(w => w.trades);
+  const s = computeStats(trades);
+
+  document.getElementById('monthStatsGrid').innerHTML = buildStatsGridHTML(s, trades.length);
+
+  const total = trades.length || 1;
+  document.getElementById('monthBarWin').style.width = (s.wins.length/total*100)+'%';
+  document.getElementById('monthBarLoss').style.width = (s.losses.length/total*100)+'%';
+  document.getElementById('monthBarFree').style.width = (s.frees.length/total*100)+'%';
+  document.getElementById('monthCntWin').textContent = s.wins.length;
+  document.getElementById('monthCntLoss').textContent = s.losses.length;
+  document.getElementById('monthCntFree').textContent = s.frees.length;
+
+  renderChart(trades, 'monthChartWrap');
+
+  const includedList = document.getElementById('includedWeeksList');
+  const sortedWeeks = m.weeks.slice().sort((a,b) => (a.createdAt||0) - (b.createdAt||0));
+  includedList.innerHTML = sortedWeeks.map(w => {
+    const ws = computeStats(w.trades);
+    const netClass = ws.countable===0 ? 'zero' : (ws.netR>=0?'pos':'neg');
+    const netText = ws.countable===0 ? '—' : (ws.netR>=0?'+':'')+ws.netR.toFixed(2)+'R';
+    return `<div class="included-week-row" onclick="openWeek('${w.id}','month')">
+      <span class="iw-name">${w.label}</span>
+      <span class="iw-net" style="color:${netClass==='pos'?'var(--win)':netClass==='neg'?'var(--loss)':'var(--text-dim)'}">${netText}</span>
+    </div>`;
+  }).join('');
+}
+
+/* ---------- weeks list ---------- */
+function computeStats(trades){
+  const wins = trades.filter(t => t.result === 'win');
+  const losses = trades.filter(t => t.result === 'loss');
+  const frees = trades.filter(t => t.result === 'free');
+  const countable = wins.length + losses.length;
+  const winRate = countable > 0 ? (wins.length / countable * 100) : 0;
+  const totalWinR = wins.reduce((s,t) => s + t.r, 0);
+  const totalLossR = losses.reduce((s,t) => s + Math.abs(t.r), 0);
+  const netR = totalWinR - totalLossR;
+  const avgWinR = wins.length ? totalWinR / wins.length : 0;
+  const avgLossR = losses.length ? totalLossR / losses.length : 0;
+  const expectancy = countable > 0
+    ? ((wins.length/countable) * avgWinR) - ((losses.length/countable) * avgLossR)
+    : 0;
+  return { wins, losses, frees, countable, winRate, totalWinR, totalLossR, netR, avgWinR, avgLossR, expectancy };
+}
+
+function renderWeeksList(){
+  const list = document.getElementById('weeksList');
+  if(weeks.length === 0){
+    list.innerHTML = `<div class="empty-weeks">${t('noWeeksYet')}<br>${t('createFirstWeek')}</div>`;
+    return;
+  }
+  list.innerHTML = weeks.map(w => {
+    const s = computeStats(w.trades);
+    const netClass = s.countable===0 ? 'zero' : (s.netR>=0?'pos':'neg');
+    const netText = s.countable===0 ? '—' : (s.netR>=0?'+':'')+s.netR.toFixed(2)+'R';
+    return `<div class="week-card" onclick="openWeek('${w.id}')">
+      <div>
+        <div class="wc-name">${w.label}</div>
+        <div class="wc-meta">${w.trades.length} ${t('tradesUnit')} &nbsp;•&nbsp; ${t('winRateLabel')} ${s.countable? s.winRate.toFixed(0)+'%':'—'}</div>
+      </div>
+      <div style="display:flex; align-items:center;">
+        <div class="wc-net ${netClass}">${netText}</div>
+        <button class="wc-del" onclick="event.stopPropagation(); deleteWeekById('${w.id}')">${t('delete')}</button>
+        <div class="wc-chev">‹</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function addWeek(){
+  const n = weeks.length + 1;
+  const label = prompt(t('newWeekPrompt'), `${t('weekLabelDefault')} ${n}`);
+  if(!label) return;
+  const w = { id: uid(), label, trades: [], capital: null, riskPct: 1, createdAt: Date.now() };
+  weeks.push(w);
+  saveTrades();
+  openWeek(w.id);
+}
+
+function renameWeek(newLabel){
+  const w = activeWeek();
+  if(!w || !newLabel.trim()) { document.getElementById('weekNameInput').value = w.label; return; }
+  w.label = newLabel.trim();
+  document.getElementById('screenTitle').textContent = w.label;
+  saveTrades();
+}
+
+function deleteWeek(){
+  if(weeks.length <= 1){ alert(t('keepAtLeastOneWeek')); return; }
+  const w = activeWeek();
+  if(!confirm(t('confirmDeleteWeek')(w.label))) return;
+  weeks = weeks.filter(x => x.id !== w.id);
+  saveTrades();
+  goHome();
+}
+
+function deleteWeekById(id){
+  if(weeks.length <= 1){ alert(t('keepAtLeastOneWeek')); return; }
+  const w = weeks.find(x => x.id === id);
+  if(!w) return;
+  if(!confirm(t('confirmDeleteWeek')(w.label))) return;
+  weeks = weeks.filter(x => x.id !== id);
+  saveTrades();
+  renderWeeksList();
+}
+
+/* ---------- capital ---------- */
+function updateCapital(){
+  const w = activeWeek();
+  const capVal = parseFloat(document.getElementById('capitalInput').value);
+  const riskVal = parseFloat(document.getElementById('riskPctInput').value);
+  w.capital = isNaN(capVal) ? null : capVal;
+  w.riskPct = isNaN(riskVal) ? 1 : riskVal;
+  saveTrades();
+  renderCapital();
+  renderWeeksList();
+}
+
+function renderCapital(){
+  const w = activeWeek();
+  const s = computeStats(w.trades);
+  const el = document.getElementById('capitalNow');
+  if(w.capital === null || w.capital === undefined){
+    el.textContent = '—';
+    el.className = 'cd-value';
+    return;
+  }
+  const risk = w.riskPct || 1;
+  const growthPct = s.netR * risk;
+  const now = w.capital * (1 + growthPct/100);
+  const locale = lang === 'fa' ? 'fa-IR' : 'en-US';
+  el.textContent = now.toLocaleString(locale, { maximumFractionDigits: 2 }) + `  (${growthPct>=0?'+':''}${growthPct.toFixed(2)}%)`;
+  el.className = 'cd-value ' + (growthPct>=0?'pos':'neg');
+}
+
+/* ---------- image handling ---------- */
+let pendingImage = null;
+let selectedResult = 'win';
+let selectedDirection = null;
+
+function selectResult(val, btn){
+  selectedResult = val;
+  document.querySelectorAll('#resultToggle .toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function selectDirection(val, btn){
+  if(selectedDirection === val){
+    selectedDirection = null;
+    btn.classList.remove('active');
+    return;
+  }
+  selectedDirection = val;
+  document.querySelectorAll('#directionToggle .toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function resetTradeForm(){
+  selectedResult = 'win';
+  selectedDirection = null;
+  document.querySelectorAll('#resultToggle .toggle-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('#resultToggle .toggle-btn.win').classList.add('active');
+  document.querySelectorAll('#directionToggle .toggle-btn').forEach(b => b.classList.remove('active'));
+}
+
+function resizeImageFile(file, maxDim, quality){
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        if(w > h && w > maxDim){ h = Math.round(h * maxDim / w); w = maxDim; }
+        else if(h > maxDim){ w = Math.round(w * maxDim / h); h = maxDim; }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = reject;
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+async function handleImageSelect(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  try{
+    pendingImage = await resizeImageFile(file, 900, 0.72);
+    document.getElementById('imgPreviewThumb').src = pendingImage;
+    document.getElementById('imgPreview').style.display = 'flex';
+    document.getElementById('imgDropText').textContent = t('imageSelected');
+  }catch(e){
+    alert(t('imageLoadError'));
+  }
+}
+
+function clearImageSelect(){
+  pendingImage = null;
+  document.getElementById('imgInput').value = '';
+  document.getElementById('imgPreview').style.display = 'none';
+  document.getElementById('imgDropText').textContent = t('chooseImage');
+}
+
+function openLightbox(src){
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('active');
+}
+
+function closeLightbox(event){
+  if(event) event.stopPropagation();
+  document.getElementById('lightbox').classList.remove('active');
+}
+
+/* ---------- trades ---------- */
+async function addTrade(){
+  const result = selectedResult;
+  let rInput = document.getElementById('rValue').value;
+  const note = document.getElementById('note').value.trim();
+  const entryTime = document.getElementById('entryTime').value;
+  const exitTime = document.getElementById('exitTime').value;
+
+  let rValue = 0;
+  if(result === 'win'){
+    rValue = parseFloat(rInput);
+    if(isNaN(rValue) || rValue <= 0){ alert(t('invalidReward')); return; }
+  } else if(result === 'loss'){
+    const risk = parseFloat(rInput);
+    rValue = -(isNaN(risk) || risk <= 0 ? 1 : risk);
+  }
+
+  currentTrades().push({
+    result, r: rValue, note, ts: Date.now(),
+    direction: selectedDirection,
+    entryTime: entryTime || null,
+    exitTime: exitTime || null,
+    image: pendingImage || null
+  });
+
+  document.getElementById('rValue').value = '';
+  document.getElementById('note').value = '';
+  document.getElementById('entryTime').value = '';
+  document.getElementById('exitTime').value = '';
+  clearImageSelect();
+  resetTradeForm();
+  saveTrades();
+  renderDetail();
+}
+
+function deleteTrade(idx){
+  currentTrades().splice(idx, 1);
+  saveTrades();
+  renderDetail();
+}
+
+function resetWeekTrades(){
+  if(!confirm(t('confirmClearTrades'))) return;
+  activeWeek().trades = [];
+  saveTrades();
+  renderDetail();
+}
+
+function fmtTime(iso){
+  if(!iso) return null;
+  const d = new Date(iso);
+  const locale = lang === 'fa' ? 'fa-IR-u-ca-persian' : 'en-US';
+  return new Intl.DateTimeFormat(locale, { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }).format(d);
+}
+
+/* ---------- chart ---------- */
+function renderChart(trades, wrapId){
+  const wrap = document.getElementById(wrapId || 'chartWrap');
+  if(trades.length === 0){
+    wrap.innerHTML = `<div class="chart-empty">${t('chartEmpty')}</div>`;
+    return;
+  }
+
+  let cum = 0;
+  const points = [0];
+  trades.forEach(t => {
+    if(t.result === 'win') cum += t.r;
+    else if(t.result === 'loss') cum -= Math.abs(t.r);
+    points.push(cum);
+  });
+
+  const W = 640, H = 220, padX = 10, padY = 24;
+  const minV = Math.min(0, ...points);
+  const maxV = Math.max(0, ...points);
+  const range = (maxV - minV) || 1;
+
+  const xStep = (W - padX*2) / (points.length - 1 || 1);
+  const yFor = (v) => H - padY - ((v - minV) / range) * (H - padY*2);
+  const xFor = (i) => padX + i * xStep;
+
+  const zeroY = yFor(0);
+  const linePts = points.map((v,i) => `${xFor(i).toFixed(1)},${yFor(v).toFixed(1)}`).join(' ');
+  const areaPts = `${padX},${zeroY} ` + linePts + ` ${xFor(points.length-1).toFixed(1)},${zeroY}`;
+
+  const finalV = points[points.length-1];
+  const lineColor = finalV >= 0 ? '#3FC583' : '#E5544B';
+
+  const dots = points.map((v,i) => {
+    if(i===0) return '';
+    const isLast = i === points.length-1;
+    return `<circle cx="${xFor(i).toFixed(1)}" cy="${yFor(v).toFixed(1)}" r="${isLast?4:2.5}" fill="${lineColor}" ${isLast?'stroke="#0E1116" stroke-width="2"':''}/>`;
+  }).join('');
+
+  wrap.innerHTML = `
+    <svg class="equity-chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">
+      <line x1="${padX}" y1="${zeroY}" x2="${W-padX}" y2="${zeroY}" stroke="#2A313D" stroke-width="1" stroke-dasharray="3,3"/>
+      <polygon points="${areaPts}" fill="${lineColor}" opacity="0.08"/>
+      <polyline points="${linePts}" fill="none" stroke="${lineColor}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      ${dots}
+    </svg>
+    <div class="chart-legend">
+      <span>${t('chartStart')}</span>
+      <span style="color:${lineColor}; font-weight:700;">${finalV>=0?'+':''}${finalV.toFixed(2)}R</span>
+    </div>
+  `;
+}
+
+/* ---------- shared stats grid builder ---------- */
+function buildStatsGridHTML(s, tradeCount){
+  const ofWord = lang === 'fa' ? 'از' : 'of';
+  return `
+    <div class="stat">
+      <div class="label">${t('winRateLabel')}</div>
+      <div class="value ${s.winRate>=50?'pos':''}">${s.winRate.toFixed(1)}%</div>
+      <div class="sub">${s.wins.length} ${ofWord} ${s.countable} ${t('tradesUnit')}</div>
+    </div>
+    <div class="stat">
+      <div class="label">${t('netOutcome')}</div>
+      <div class="value ${s.netR>=0?'pos':'neg'}">${s.netR>=0?'+':''}${s.netR.toFixed(2)}R</div>
+      <div class="sub">${tradeCount} ${t('tradesRecorded')}</div>
+    </div>
+    <div class="stat">
+      <div class="label">${t('avgWin')}</div>
+      <div class="value pos">${s.avgWinR.toFixed(2)}R</div>
+      <div class="sub">${t('sum')} +${s.totalWinR.toFixed(1)}R</div>
+    </div>
+    <div class="stat">
+      <div class="label">${t('avgLoss')}</div>
+      <div class="value neg">${s.avgLossR.toFixed(2)}R</div>
+      <div class="sub">${t('sum')} -${s.totalLossR.toFixed(1)}R</div>
+    </div>
+    <div class="stat wide">
+      <div class="label">${t('expectancyLabel')}</div>
+      <div class="value ${s.expectancy>=0?'pos':'neg'}">${s.expectancy>=0?'+':''}${s.expectancy.toFixed(3)}R</div>
+      <div class="sub">${t('expectancySub')}</div>
+    </div>
+  `;
+}
+
+/* ---------- detail render ---------- */
+function renderDetail(){
+  const w = activeWeek();
+  if(!w) return;
+  document.getElementById('weekNameInput').value = w.label;
+  document.getElementById('capitalInput').value = w.capital === null ? '' : w.capital;
+  document.getElementById('riskPctInput').value = w.riskPct;
+
+  const trades = w.trades;
+  const s = computeStats(trades);
+
+  document.getElementById('statsGrid').innerHTML = buildStatsGridHTML(s, trades.length);
+
+  const total = trades.length || 1;
+  document.getElementById('barWin').style.width = (s.wins.length/total*100)+'%';
+  document.getElementById('barLoss').style.width = (s.losses.length/total*100)+'%';
+  document.getElementById('barFree').style.width = (s.frees.length/total*100)+'%';
+  document.getElementById('cntWin').textContent = s.wins.length;
+  document.getElementById('cntLoss').textContent = s.losses.length;
+  document.getElementById('cntFree').textContent = s.frees.length;
+
+  const tradeCards = document.getElementById('tradeCards');
+  const emptyMsg = document.getElementById('emptyMsg');
+  if(trades.length === 0){
+    tradeCards.innerHTML = '';
+    emptyMsg.style.display = 'block';
+  } else {
+    emptyMsg.style.display = 'none';
+    tradeCards.innerHTML = trades.slice().reverse().map((tr, revIdx) => {
+      const idx = trades.length - 1 - revIdx;
+      const labelMap = { win: t('resultWin'), loss: t('resultLoss'), free: t('riskFree') };
+      const rDisplay = tr.result === 'free' ? '—' : (tr.r>=0?'+':'') + tr.r.toFixed(2) + 'R';
+      const rClass = tr.result === 'free' ? '' : (tr.r>=0?'pos':'neg');
+      const dirBadge = tr.direction === 'long' ? `<span class="badge win">${t('long')}</span>`
+        : tr.direction === 'short' ? `<span class="badge loss">${t('short')}</span>` : '';
+      const thumb = tr.image
+        ? `<img class="trade-thumb" src="${tr.image}" onclick="openLightbox('${tr.image}')">`
+        : `<div class="trade-thumb-empty"></div>`;
+      const entryStr = fmtTime(tr.entryTime);
+      const exitStr = fmtTime(tr.exitTime);
+      const timesLine = (entryStr || exitStr)
+        ? `<div class="trade-times">${entryStr ? t('entry')+' '+entryStr : ''}${entryStr && exitStr ? ' → ' : ''}${exitStr ? t('exit')+' '+exitStr : ''}</div>`
+        : '';
+      return `<div class="trade-card">
+        ${thumb}
+        <div class="trade-info">
+          <div class="trade-top">
+            <div style="display:flex; gap:6px; align-items:center;">
+              <span class="badge ${tr.result}">${labelMap[tr.result]}</span>
+              ${dirBadge}
+            </div>
+            <span class="trade-r ${rClass}">${rDisplay}</span>
+          </div>
+          ${tr.note ? `<div class="trade-note">${tr.note}</div>` : ''}
+          ${timesLine}
+        </div>
+        <div class="trade-actions">
+          <button class="del" onclick="deleteTrade(${idx})">${t('delete')}</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  renderChart(trades);
+  renderCapital();
+}
+
+applyStaticText();
+loadTrades();
+resetTradeForm();
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js').catch(() => {});
+  });
+}
+</script>
+
+</body>
+</html>
