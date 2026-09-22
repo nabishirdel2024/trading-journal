@@ -19,8 +19,10 @@
     --line:#2A313D;
     --gold:#C9A14A;
     --gold-dim:#8F7638;
-    --loss:#B5654F;
-    --loss-dim:#7A483A;
+    --win:#3FC583;
+    --win-dim:#2C8A5C;
+    --loss:#E5544B;
+    --loss-dim:#A83A34;
     --free:#6E7E8C;
     --text:#EDE7D9;
     --text-bright:#F6F1E4;
@@ -40,16 +42,14 @@
   body{
     background-color: var(--ink);
     background-image:
-      linear-gradient(rgba(201,161,74,0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,161,74,0.035) 1px, transparent 1px),
-      url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20900%20500%22%3E%0A%3Cg%20opacity%3D%220.06%22%3E%0A%3Cline%20x1%3D%2227.0%22%20y1%3D%22258.0%22%20x2%3D%2227.0%22%20y2%3D%22217.9%22%20stroke%3D%22%23C9A14A%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%2220.0%22%20y%3D%22235.9%22%20width%3D%2214%22%20height%3D%2214.1%22%20fill%3D%22%23C9A14A%22/%3E%3Cline%20x1%3D%2253.0%22%20y1%3D%22251.6%22%20x2%3D%2253.0%22%20y2%3D%22189.4%22%20stroke%3D%22%23C9A14A%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%2246.0%22%20y%3D%22201.7%22%20width%3D%2214%22%20height%3D%2234.2%22%20fill%3D%22%23C9A14A%22/%3E%3Cline%20x1%3D%2279.0%22%20y1%3D%22216.9%22%20x2%3D%2279.0%22%20y2%3D%22160.6%22%20stroke%3D%22%23C9A14A%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%2272.0%22%20y%3D%22166.3%22%20width%3D%2214%22%20height%3D%2235.4%22%20fill%3D%22%23C9A14A%22/%3E%3Cline%20x1%3D%22105.0%22%20y1%3D%22172.7%22%20x2%3D%22105.0%22%20y2%3D%22154.2%22%20stroke%3D%22%23C9A14A%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%2298.0%22%20y%3D%22161.0%22%20width%3D%2214%22%20height%3D%225.3%22%20fill%3D%22%23C9A14A%22/%3E%3Cline%20x1%3D%22131.0%22%20y1%3D%22182.6%22%20x2%3D%22131.0%22%20y2%3D%22147.5%22%20stroke%3D%22%23C9A14A%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22124.0%22%20y%3D%22155.0%22%20width%3D%2214%22%20height%3D%226.0%22%20fill%3D%22%23C9A14A%22/%3E%3Cline%20x1%3D%22157.0%22%20y1%3D%22172.5%22%20x2%3D%22157.0%22%20y2%3D%22108.9%22%20stroke%3D%22%23C9A14A%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22150.0%22%20y%3D%22132.9%22%20width%3D%2214%22%20height%3D%2222.1%22%20fill%3D%22%23C9A14A%22/%3E%3Cline%20x1%3D%22183.0%22%20y1%3D%22152.0%22%20x2%3D%22183.0%22%20y2%3D%22108.3%22%20stroke%3D%22%23B5654F%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22176.0%22%20y%3D%22132.9%22%20width%3D%2214%22%20height%3D%226.2%22%20fill%3D%22%23B5654F%22/%3E%3Cline%20x1%3D%22209.0%22%20y1%3D%22161.2%22%20x2%3D%22209.0%22%20y2%3D%2292.0%22%20stroke%3D%22%23C9A14A%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22202.0%22%20y%3D%22102.7%22%20width%3D%2214%22%20height%3D%2236.3%22%20fill%3D%22%23C9A14A%22/%3E%3Cline%20x1%3D%22235.0%22%20y1%3D%22110.1%22%20x2%3D%22235.0%22%20y2%3D%2263.1%22%20stroke%3D%22%23C9A14A%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22228.0%22%20y%3D%2274.3%22%20width%3D%2214%22%20height%3D%2228.5%22%20fill%3D%22%23C9A14A%22/%3E%3Cline%20x1%3D%22261.0%22%20y1%3D%22108.2%22%20x2%3D%22261.0%22%20y2%3D%2257.7%22%20stroke%3D%22%23B5654F%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22254.0%22%20y%3D%2274.3%22%20width%3D%2214%22%20height%3D%2225.3%22%20fill%3D%22%23B5654F%22/%3E%3Cline%20x1%3D%22287.0%22%20y1%3D%22123.1%22%20x2%3D%22287.0%22%20y2%3D%2283.6%22%20stroke%3D%22%23B5654F%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22280.0%22%20y%3D%2299.6%22%20width%3D%2214%22%20height%3D%2211.1%22%20fill%3D%22%23B5654F%22/%3E%3Cline%20x1%3D%22313.0%22%20y1%3D%22116.9%22%20x2%3D%22313.0%22%20y2%3D%2266.6%22%20stroke%3D%22%23C9A14A%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22306.0%22%20y%3D%2275.7%22%20width%3D%2214%22%20height%3D%2235.0%22%20fill%3D%22%23C9A14A%22/%3E%3Cline%20x1%3D%22339.0%22%20y1%3D%22103.7%22%20x2%3D%22339.0%22%20y2%3D%2264.4%22%20stroke%3D%22%23B5654F%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22332.0%22%20y%3D%2275.7%22%20width%3D%2214%22%20height%3D%2214.4%22%20fill%3D%22%23B5654F%22/%3E%3Cline%20x1%3D%22365.0%22%20y1%3D%22111.1%22%20x2%3D%22365.0%22%20y2%3D%2279.2%22%20stroke%3D%22%23B5654F%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22358.0%22%20y%3D%2290.1%22%20width%3D%2214%22%20height%3D%226.8%22%20fill%3D%22%23B5654F%22/%3E%3Cline%20x1%3D%22391.0%22%20y1%3D%22139.5%22%20x2%3D%22391.0%22%20y2%3D%2287.1%22%20stroke%3D%22%23B5654F%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22384.0%22%20y%3D%2297.0%22%20width%3D%2214%22%20height%3D%2223.6%22%20fill%3D%22%23B5654F%22/%3E%3Cline%20x1%3D%22417.0%22%20y1%3D%22142.0%22%20x2%3D%22417.0%22%20y2%3D%2298.0%22%20stroke%3D%22%23B5654F%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22410.0%22%20y%3D%22120.5%22%20width%3D%2214%22%20height%3D%226.0%22%20fill%3D%22%23B5654F%22/%3E%3Cline%20x1%3D%22443.0%22%20y1%3D%22155.6%22%20x2%3D%22443.0%22%20y2%3D%22101.9%22%20stroke%3D%22%23B5654F%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22436.0%22%20y%3D%22126.5%22%20width%3D%2214%22%20height%3D%2218.4%22%20fill%3D%22%23B5654F%22/%3E%3Cline%20x1%3D%22469.0%22%20y1%3D%22158.2%22%20x2%3D%22469.0%22%20y2%3D%2294.2%22%20stroke%3D%22%23C9A14A%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22462.0%22%20y%3D%22114.3%22%20width%3D%2214%22%20height%3D%2230.6%22%20fill%3D%22%23C9A14A%22/%3E%3Cline%20x1%3D%22495.0%22%20y1%3D%22129.1%22%20x2%3D%22495.0%22%20y2%3D%2280.7%22%20stroke%3D%22%23C9A14A%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22488.0%22%20y%3D%2286.5%22%20width%3D%2214%22%20height%3D%2227.8%22%20fill%3D%22%23C9A14A%22/%3E%3Cline%20x1%3D%22521.0%22%20y1%3D%22120.2%22%20x2%3D%22521.0%22%20y2%3D%2270.0%22%20stroke%3D%22%23B5654F%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22514.0%22%20y%3D%2286.5%22%20width%3D%2214%22%20height%3D%2213.5%22%20fill%3D%22%23B5654F%22/%3E%3Cline%20x1%3D%22547.0%22%20y1%3D%22141.2%22%20x2%3D%22547.0%22%20y2%3D%2281.0%22%20stroke%3D%22%23B5654F%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22540.0%22%20y%3D%2299.9%22%20width%3D%2214%22%20height%3D%2230.0%22%20fill%3D%22%23B5654F%22/%3E%3Cline%20x1%3D%22573.0%22%20y1%3D%22154.1%22%20x2%3D%22573.0%22%20y2%3D%22115.8%22%20stroke%3D%22%23B5654F%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22566.0%22%20y%3D%22130.0%22%20width%3D%2214%22%20height%3D%227.5%22%20fill%3D%22%23B5654F%22/%3E%3Cline%20x1%3D%22599.0%22%20y1%3D%22188.6%22%20x2%3D%22599.0%22%20y2%3D%22123.0%22%20stroke%3D%22%23B5654F%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22592.0%22%20y%3D%22137.5%22%20width%3D%2214%22%20height%3D%2227.2%22%20fill%3D%22%23B5654F%22/%3E%3Cline%20x1%3D%22625.0%22%20y1%3D%22184.0%22%20x2%3D%22625.0%22%20y2%3D%22145.7%22%20stroke%3D%22%23B5654F%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22618.0%22%20y%3D%22164.7%22%20width%3D%2214%22%20height%3D%2213.1%22%20fill%3D%22%23B5654F%22/%3E%3Cline%20x1%3D%22651.0%22%20y1%3D%22214.5%22%20x2%3D%22651.0%22%20y2%3D%22156.4%22%20stroke%3D%22%23B5654F%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22644.0%22%20y%3D%22177.8%22%20width%3D%2214%22%20height%3D%2211.8%22%20fill%3D%22%23B5654F%22/%3E%3Cline%20x1%3D%22677.0%22%20y1%3D%22202.3%22%20x2%3D%22677.0%22%20y2%3D%22154.0%22%20stroke%3D%22%23C9A14A%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22670.0%22%20y%3D%22172.4%22%20width%3D%2214%22%20height%3D%2217.2%22%20fill%3D%22%23C9A14A%22/%3E%3Cline%20x1%3D%22703.0%22%20y1%3D%22186.6%22%20x2%3D%22703.0%22%20y2%3D%22125.8%22%20stroke%3D%22%23C9A14A%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22696.0%22%20y%3D%22134.2%22%20width%3D%2214%22%20height%3D%2238.2%22%20fill%3D%22%23C9A14A%22/%3E%3Cline%20x1%3D%22729.0%22%20y1%3D%22140.4%22%20x2%3D%22729.0%22%20y2%3D%2283.2%22%20stroke%3D%22%23C9A14A%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22722.0%22%20y%3D%22103.5%22%20width%3D%2214%22%20height%3D%2230.6%22%20fill%3D%22%23C9A14A%22/%3E%3Cline%20x1%3D%22755.0%22%20y1%3D%22113.5%22%20x2%3D%22755.0%22%20y2%3D%2261.1%22%20stroke%3D%22%23C9A14A%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22748.0%22%20y%3D%2273.9%22%20width%3D%2214%22%20height%3D%2229.7%22%20fill%3D%22%23C9A14A%22/%3E%3Cline%20x1%3D%22781.0%22%20y1%3D%22110.2%22%20x2%3D%22781.0%22%20y2%3D%2259.9%22%20stroke%3D%22%23B5654F%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22774.0%22%20y%3D%2273.9%22%20width%3D%2214%22%20height%3D%2229.7%22%20fill%3D%22%23B5654F%22/%3E%3Cline%20x1%3D%22807.0%22%20y1%3D%22130.2%22%20x2%3D%22807.0%22%20y2%3D%2282.2%22%20stroke%3D%22%23B5654F%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22800.0%22%20y%3D%22103.6%22%20width%3D%2214%22%20height%3D%224.0%22%20fill%3D%22%23B5654F%22/%3E%3Cline%20x1%3D%22833.0%22%20y1%3D%22147.2%22%20x2%3D%22833.0%22%20y2%3D%2294.3%22%20stroke%3D%22%23B5654F%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22826.0%22%20y%3D%22107.6%22%20width%3D%2214%22%20height%3D%2229.1%22%20fill%3D%22%23B5654F%22/%3E%3Cline%20x1%3D%22859.0%22%20y1%3D%22159.4%22%20x2%3D%22859.0%22%20y2%3D%22101.2%22%20stroke%3D%22%23C9A14A%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22852.0%22%20y%3D%22125.4%22%20width%3D%2214%22%20height%3D%2211.3%22%20fill%3D%22%23C9A14A%22/%3E%3Cline%20x1%3D%22885.0%22%20y1%3D%22133.9%22%20x2%3D%22885.0%22%20y2%3D%2287.8%22%20stroke%3D%22%23C9A14A%22%20stroke-width%3D%221.5%22/%3E%3Crect%20x%3D%22878.0%22%20y%3D%2297.5%22%20width%3D%2214%22%20height%3D%2227.9%22%20fill%3D%22%23C9A14A%22/%3E%0A%3C/g%3E%0A%3C/svg%3E"),
-      radial-gradient(ellipse 900px 500px at 12% -5%, rgba(201,161,74,0.10), transparent 60%),
-      radial-gradient(ellipse 800px 500px at 100% 100%, rgba(181,101,79,0.08), transparent 55%),
-      radial-gradient(ellipse 1200px 800px at 50% 50%, rgba(0,0,0,0), rgba(0,0,0,0.35) 100%);
-    background-size: 34px 34px, 34px 34px, cover, auto, auto, auto;
-    background-position: 0 0, 0 0, center top, center, center, center;
-    background-attachment: fixed, fixed, fixed, fixed, fixed, fixed;
-    background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+      linear-gradient(rgba(201,161,74,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,161,74,0.045) 1px, transparent 1px),
+      radial-gradient(ellipse 900px 600px at 15% 0%, rgba(201,161,74,0.11), transparent 55%),
+      radial-gradient(ellipse 900px 600px at 100% 100%, rgba(229,84,75,0.08), transparent 55%),
+      radial-gradient(ellipse 1300px 900px at 50% 40%, rgba(0,0,0,0), rgba(0,0,0,0.45) 100%);
+    background-size: 32px 32px, 32px 32px, auto, auto, auto;
+    background-attachment: fixed;
+    background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat;
   }
 
   .wrap{ max-width: 720px; margin: 0 auto; padding: 22px 16px 60px; }
@@ -78,6 +78,21 @@
     flex-shrink:0;
   }
   .back-btn:hover{ border-color: var(--gold-dim); color: var(--gold); }
+
+  .lang-btn{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor:pointer;
+    flex-shrink:0;
+    font-family: 'Courier New', monospace;
+  }
+  .lang-btn:hover{ border-color: var(--gold-dim); color: var(--gold); }
 
   .topbar h1{
     font-size: 1.3rem;
@@ -131,7 +146,7 @@
     font-size: 1.2rem;
     font-weight: 700;
   }
-  .week-card .wc-net.pos{ color: var(--gold); }
+  .week-card .wc-net.pos{ color: var(--win); }
   .week-card .wc-net.neg{ color: var(--loss); }
   .week-card .wc-net.zero{ color: var(--text-dim); }
 
@@ -140,6 +155,23 @@
     font-size: 1.2rem;
     margin-inline-start: 10px;
   }
+
+  .wc-del{
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    padding: 6px 10px;
+    height: 30px;
+    border-radius: 7px;
+    font-size: 0.72rem;
+    font-family: inherit;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+    display:flex; align-items:center; justify-content:center;
+    margin-inline-start: 8px;
+  }
+  .wc-del:hover{ color: var(--loss); border-color: var(--loss-dim); }
 
   .add-week-btn{
     width:100%;
@@ -291,7 +323,7 @@
   }
   .capital-display .cd-label{ font-size: 0.75rem; color: var(--text-dim); }
   .capital-display .cd-value{ font-family:'Courier New', monospace; font-size: 1.15rem; font-weight:700; }
-  .capital-display .cd-value.pos{ color: var(--gold); }
+  .capital-display .cd-value.pos{ color: var(--win); }
   .capital-display .cd-value.neg{ color: var(--loss); }
 
   button.primary-btn{
@@ -333,11 +365,11 @@
     font-family: inherit;
     transition: all 0.12s ease;
   }
-  .toggle-btn.active.win{ background: rgba(201,161,74,0.16); border-color: var(--gold); color: var(--gold); }
-  .toggle-btn.active.loss{ background: rgba(181,101,79,0.16); border-color: var(--loss); color: var(--loss); }
+  .toggle-btn.active.win{ background: rgba(63,197,131,0.16); border-color: var(--win); color: var(--win); }
+  .toggle-btn.active.loss{ background: rgba(229,84,75,0.16); border-color: var(--loss); color: var(--loss); }
   .toggle-btn.active.free{ background: rgba(110,126,140,0.16); border-color: var(--free); color: var(--free); }
-  .toggle-btn.active.long{ background: rgba(201,161,74,0.16); border-color: var(--gold); color: var(--gold); }
-  .toggle-btn.active.short{ background: rgba(181,101,79,0.16); border-color: var(--loss); color: var(--loss); }
+  .toggle-btn.active.long{ background: rgba(63,197,131,0.16); border-color: var(--win); color: var(--win); }
+  .toggle-btn.active.short{ background: rgba(229,84,75,0.16); border-color: var(--loss); color: var(--loss); }
 
   /* ---- collapsible details ---- */
   details.more-details{ margin-bottom: 12px; }
@@ -371,7 +403,7 @@
   }
   .stat .label{ font-size: 0.68rem; color: var(--text-dim); margin-bottom: 8px; }
   .stat .value{ font-family: 'Courier New', monospace; font-size: 1.3rem; font-weight: 700; line-height:1; }
-  .stat .value.pos{ color: var(--gold); }
+  .stat .value.pos{ color: var(--win); }
   .stat .value.neg{ color: var(--loss); }
   .stat .sub{ font-size: 0.66rem; color: var(--text-dim); margin-top: 6px; font-family: 'Courier New', monospace; }
   .stat.wide{ grid-column: span 2; }
@@ -394,7 +426,7 @@
   .meter .tag{ width: 66px; font-size: 0.72rem; color: var(--text-dim); flex-shrink:0; }
   .meter .track{ flex:1; height: 9px; background: var(--panel-2); border-radius: 5px; overflow:hidden; }
   .meter .fill{ height:100%; border-radius: 5px; transition: width 0.4s ease; }
-  .meter .fill.win{ background: var(--gold); }
+  .meter .fill.win{ background: var(--win); }
   .meter .fill.loss{ background: var(--loss); }
   .meter .fill.free{ background: var(--free); }
   .meter .count{ width: 34px; text-align:left; font-family:'Courier New', monospace; font-size: 0.78rem; color: var(--text-dim); }
@@ -406,8 +438,8 @@
   tr:last-child td{ border-bottom:none; }
 
   .badge{ display:inline-block; padding: 2px 9px; border-radius: 20px; font-size: 0.7rem; font-family: 'Vazirmatn', sans-serif; }
-  .badge.win{ background: rgba(201,161,74,0.15); color: var(--gold); }
-  .badge.loss{ background: rgba(181,101,79,0.15); color: var(--loss); }
+  .badge.win{ background: rgba(63,197,131,0.15); color: var(--win); }
+  .badge.loss{ background: rgba(229,84,75,0.15); color: var(--loss); }
   .badge.free{ background: rgba(110,126,140,0.15); color: var(--free); }
 
   .del{ background:none; border:none; color: var(--text-dim); cursor:pointer; font-size: 0.85rem; }
@@ -493,7 +525,7 @@
   .trade-info{ flex:1; min-width:0; }
   .trade-top{ display:flex; align-items:center; justify-content:space-between; gap: 8px; margin-bottom: 4px; }
   .trade-r{ font-family:'Courier New', monospace; font-weight:700; font-size: 0.95rem; }
-  .trade-r.pos{ color: var(--gold); }
+  .trade-r.pos{ color: var(--win); }
   .trade-r.neg{ color: var(--loss); }
   .trade-note{ font-size: 0.8rem; color: var(--text-bright); margin-bottom: 3px; }
   .trade-times{ font-size: 0.68rem; color: var(--text-dim); font-family:'Courier New', monospace; }
@@ -533,44 +565,45 @@
   <div class="topbar">
     <button class="back-btn" id="backBtn" onclick="handleBack()">←</button>
     <div style="flex:1;">
-      <h1 id="screenTitle">ژورنال معاملاتی</h1>
+      <h1 id="screenTitle" data-i18n="appTitle">ژورنال معاملاتی</h1>
       <div class="sub" id="dateNow"></div>
     </div>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
   </div>
 
   <!-- ===== SCREEN 1: WEEKS LIST ===== -->
   <div class="screen active" id="screen-weeks">
     <div class="tab-bar">
-      <button id="tabWeeksBtn" class="active" onclick="switchTab('weeks')">هفته‌ها</button>
-      <button id="tabMonthsBtn" onclick="switchTab('months')">برآیند ماهانه</button>
+      <button id="tabWeeksBtn" class="active" onclick="switchTab('weeks')" data-i18n="tabWeeks">هفته‌ها</button>
+      <button id="tabMonthsBtn" onclick="switchTab('months')" data-i18n="tabMonths">برآیند ماهانه</button>
     </div>
     <div id="weeksList"></div>
-    <button class="add-week-btn" id="addWeekBtn" onclick="addWeek()">+ افزودن هفته جدید</button>
+    <button class="add-week-btn" id="addWeekBtn" onclick="addWeek()" data-i18n="addWeekBtn">+ افزودن هفته جدید</button>
     <div id="monthsList" style="display:none;"></div>
   </div>
 
   <!-- ===== SCREEN 3: MONTH DETAIL ===== -->
   <div class="screen" id="screen-month">
     <div class="section">
-      <div class="section-head"><div class="title" id="monthTitle">برآیند ماهانه</div></div>
+      <div class="section-head"><div class="title" id="monthTitle" data-i18n="tabMonths">برآیند ماهانه</div></div>
     </div>
 
     <div class="section">
-      <div class="section-head"><div class="title">وین ریت و ریوارد</div></div>
+      <div class="section-head"><div class="title" data-i18n="winRateReward">وین ریت و ریوارد</div></div>
       <div class="stats-grid" id="monthStatsGrid"></div>
       <div class="meter" style="margin-top:14px;">
         <div class="row">
-          <div class="tag">سود</div>
+          <div class="tag" data-i18n="win">سود</div>
           <div class="track"><div class="fill win" id="monthBarWin"></div></div>
           <div class="count" id="monthCntWin">0</div>
         </div>
         <div class="row">
-          <div class="tag">ضرر</div>
+          <div class="tag" data-i18n="loss">ضرر</div>
           <div class="track"><div class="fill loss" id="monthBarLoss"></div></div>
           <div class="count" id="monthCntLoss">0</div>
         </div>
         <div class="row">
-          <div class="tag">ریسک‌فری</div>
+          <div class="tag" data-i18n="riskFree">ریسک‌فری</div>
           <div class="track"><div class="fill free" id="monthBarFree"></div></div>
           <div class="count" id="monthCntFree">0</div>
         </div>
@@ -578,12 +611,12 @@
     </div>
 
     <div class="section">
-      <div class="section-head"><div class="title">نمودار برآیند ماه</div></div>
+      <div class="section-head"><div class="title" data-i18n="monthChartTitle">نمودار برآیند ماه</div></div>
       <div class="chart-wrap" id="monthChartWrap"></div>
     </div>
 
     <div class="section">
-      <div class="section-head"><div class="title">هفته‌های شامل این ماه</div></div>
+      <div class="section-head"><div class="title" data-i18n="includedWeeksTitle">هفته‌های شامل این ماه</div></div>
       <div id="includedWeeksList"></div>
     </div>
   </div>
@@ -594,45 +627,45 @@
     <div class="section">
       <div class="section-head">
         <input class="rename-input" id="weekNameInput" onchange="renameWeek(this.value)">
-        <button class="action" onclick="deleteWeek()">حذف هفته</button>
+        <button class="action" onclick="deleteWeek()" data-i18n="deleteWeek">حذف هفته</button>
       </div>
     </div>
 
     <div class="section">
-      <div class="section-head"><div class="title">سرمایه</div></div>
+      <div class="section-head"><div class="title" data-i18n="capitalTitle">سرمایه</div></div>
       <div class="row2">
         <div class="field">
-          <label>سرمایه اولیه</label>
-          <input type="number" id="capitalInput" placeholder="مثلا 1000" onchange="updateCapital()">
+          <label data-i18n="initialCapital">سرمایه اولیه</label>
+          <input type="number" id="capitalInput" placeholder="e.g. 1000" data-i18n-placeholder="egCapital" onchange="updateCapital()">
         </div>
         <div class="field">
-          <label>ریسک هر معامله (٪)</label>
-          <input type="number" id="riskPctInput" step="0.1" placeholder="مثلا 1" onchange="updateCapital()">
+          <label data-i18n="riskPerTrade">ریسک هر معامله (٪)</label>
+          <input type="number" id="riskPctInput" step="0.1" placeholder="e.g. 1" data-i18n-placeholder="egRisk" onchange="updateCapital()">
         </div>
       </div>
       <div class="capital-display">
-        <div class="cd-label">سرمایه تخمینی فعلی</div>
+        <div class="cd-label" data-i18n="estimatedCapital">سرمایه تخمینی فعلی</div>
         <div class="cd-value" id="capitalNow">—</div>
       </div>
-      <div class="hint">تخمین بدون احتساب کامپوند شدن — صرفاً بر اساس مجموع R و درصد ریسک هر معامله محاسبه می‌شه.</div>
+      <div class="hint" data-i18n="capitalHint">تخمین بدون احتساب کامپوند شدن — صرفاً بر اساس مجموع R و درصد ریسک هر معامله محاسبه می‌شه.</div>
     </div>
 
     <div class="section">
-      <div class="section-head"><div class="title">وین ریت و ریوارد</div></div>
+      <div class="section-head"><div class="title" data-i18n="winRateReward">وین ریت و ریوارد</div></div>
       <div class="stats-grid" id="statsGrid"></div>
       <div class="meter" style="margin-top:14px;">
         <div class="row">
-          <div class="tag">سود</div>
+          <div class="tag" data-i18n="win">سود</div>
           <div class="track"><div class="fill win" id="barWin"></div></div>
           <div class="count" id="cntWin">0</div>
         </div>
         <div class="row">
-          <div class="tag">ضرر</div>
+          <div class="tag" data-i18n="loss">ضرر</div>
           <div class="track"><div class="fill loss" id="barLoss"></div></div>
           <div class="count" id="cntLoss">0</div>
         </div>
         <div class="row">
-          <div class="tag">ریسک‌فری</div>
+          <div class="tag" data-i18n="riskFree">ریسک‌فری</div>
           <div class="track"><div class="fill free" id="barFree"></div></div>
           <div class="count" id="cntFree">0</div>
         </div>
@@ -640,77 +673,77 @@
     </div>
 
     <div class="section">
-      <div class="section-head"><div class="title">نمودار برآیند هفته</div></div>
+      <div class="section-head"><div class="title" data-i18n="weekChartTitle">نمودار برآیند هفته</div></div>
       <div class="chart-wrap" id="chartWrap"></div>
     </div>
 
     <div class="section">
-      <div class="section-head"><div class="title">افزودن معامله</div></div>
+      <div class="section-head"><div class="title" data-i18n="addTradeTitle">افزودن معامله</div></div>
 
       <div class="field">
-        <label>نتیجه</label>
+        <label data-i18n="resultLabel">نتیجه</label>
         <div class="toggle-group g3" id="resultToggle">
-          <button type="button" class="toggle-btn win" onclick="selectResult('win', this)">سود</button>
-          <button type="button" class="toggle-btn loss" onclick="selectResult('loss', this)">ضرر</button>
-          <button type="button" class="toggle-btn free" onclick="selectResult('free', this)">فری</button>
+          <button type="button" class="toggle-btn win" onclick="selectResult('win', this)" data-i18n="resultWin">سود</button>
+          <button type="button" class="toggle-btn loss" onclick="selectResult('loss', this)" data-i18n="resultLoss">ضرر</button>
+          <button type="button" class="toggle-btn free" onclick="selectResult('free', this)" data-i18n="riskFree">فری</button>
         </div>
       </div>
 
       <div class="field">
-        <label>جهت معامله</label>
+        <label data-i18n="directionLabel">جهت معامله</label>
         <div class="toggle-group g2" id="directionToggle">
-          <button type="button" class="toggle-btn long" onclick="selectDirection('long', this)">لانگ</button>
-          <button type="button" class="toggle-btn short" onclick="selectDirection('short', this)">سل</button>
+          <button type="button" class="toggle-btn long" onclick="selectDirection('long', this)" data-i18n="long">لانگ</button>
+          <button type="button" class="toggle-btn short" onclick="selectDirection('short', this)" data-i18n="short">سل</button>
         </div>
       </div>
 
       <div class="field">
-        <label>ریوارد (R)</label>
-        <input type="number" id="rValue" step="0.1" placeholder="مثلا 4.2">
+        <label data-i18n="rewardLabel">ریوارد (R)</label>
+        <input type="number" id="rValue" step="0.1" placeholder="e.g. 4.2" data-i18n-placeholder="egReward">
       </div>
 
       <details class="more-details">
-        <summary>جزئیات بیشتر (یادداشت، زمان، عکس)</summary>
+        <summary data-i18n="moreDetails">جزئیات بیشتر (یادداشت، زمان، عکس)</summary>
         <div class="more-body">
           <div class="field">
-            <label>یادداشت (اختیاری)</label>
-            <input type="text" id="note" placeholder="مثلا XAUUSD">
+            <label data-i18n="noteLabel">یادداشت (اختیاری)</label>
+            <input type="text" id="note" placeholder="XAUUSD">
           </div>
           <div class="row2">
             <div class="field">
-              <label>زمان ورود</label>
+              <label data-i18n="entryTimeLabel">زمان ورود</label>
               <input type="datetime-local" id="entryTime">
             </div>
             <div class="field">
-              <label>زمان خروج</label>
+              <label data-i18n="exitTimeLabel">زمان خروج</label>
               <input type="datetime-local" id="exitTime">
             </div>
           </div>
           <div class="field">
-            <label>تصویر معامله (اختیاری)</label>
+            <label data-i18n="imageLabel">تصویر معامله (اختیاری)</label>
             <div class="img-drop" id="imgDropZone">
-              <span id="imgDropText">📷 انتخاب عکس از گالری</span>
+              <span id="imgDropText" data-i18n="chooseImage">📷 انتخاب عکس از گالری</span>
               <input type="file" accept="image/*" id="imgInput" onchange="handleImageSelect(event)">
             </div>
             <div class="img-preview" id="imgPreview" style="display:none;">
               <img id="imgPreviewThumb">
-              <button type="button" onclick="clearImageSelect()">حذف عکس</button>
+              <button type="button" onclick="clearImageSelect()" data-i18n="removeImage">حذف عکس</button>
             </div>
           </div>
         </div>
       </details>
 
-      <button class="primary-btn" onclick="addTrade()">ثبت معامله</button>
-      <div class="hint">برای معامله ضرر، فقط عدد ریسک رو مثبت وارد کن (مثلا ۱) — خودش به‌صورت ۱- R حساب می‌شه.</div>
+      <button class="primary-btn" onclick="addTrade()" data-i18n="submitTrade">ثبت معامله</button>
+      <div class="hint" data-i18n="lossHint">برای معامله ضرر، فقط عدد ریسک رو مثبت وارد کن (مثلا ۱) — خودش به‌صورت ۱- R حساب می‌شه.</div>
     </div>
 
     <div class="section">
       <div class="section-head">
-        <div class="title">لیست معاملات</div>
-        <button class="action" onclick="resetWeekTrades()">پاک کردن همه</button>
+        <div class="title" data-i18n="tradeListTitle">لیست معاملات</div>
+        <button class="action" onclick="resetWeekTrades()" data-i18n="clearAll">پاک کردن همه</button>
       </div>
       <div id="tradeCards"></div>
-      <div class="empty" id="emptyMsg" style="display:none;">هنوز معامله‌ای ثبت نشده</div>
+      <div class="empty" id="emptyMsg" style="display:none;" data-i18n="noTradesYet">هنوز معامله‌ای ثبت نشده</div>
     </div>
 
   </div>
@@ -724,10 +757,199 @@
 </div>
 
 <script>
+const I18N = {
+  fa: {
+    appTitle: 'ژورنال معاملاتی',
+    tabWeeks: 'هفته‌ها',
+    tabMonths: 'برآیند ماهانه',
+    addWeekBtn: '+ افزودن هفته جدید',
+    winRateReward: 'وین ریت و ریوارد',
+    win: 'سود',
+    loss: 'ضرر',
+    resultWin: 'سود',
+    resultLoss: 'ضرر',
+    riskFree: 'ریسک‌فری',
+    monthChartTitle: 'نمودار برآیند ماه',
+    includedWeeksTitle: 'هفته‌های شامل این ماه',
+    deleteWeek: 'حذف هفته',
+    capitalTitle: 'سرمایه',
+    initialCapital: 'سرمایه اولیه',
+    riskPerTrade: 'ریسک هر معامله (٪)',
+    estimatedCapital: 'سرمایه تخمینی فعلی',
+    capitalHint: 'تخمین بدون احتساب کامپوند شدن — صرفاً بر اساس مجموع R و درصد ریسک هر معامله محاسبه می‌شه.',
+    weekChartTitle: 'نمودار برآیند هفته',
+    addTradeTitle: 'افزودن معامله',
+    resultLabel: 'نتیجه',
+    directionLabel: 'جهت معامله',
+    long: 'لانگ',
+    short: 'سل',
+    rewardLabel: 'ریوارد (R)',
+    moreDetails: 'جزئیات بیشتر (یادداشت، زمان، عکس)',
+    noteLabel: 'یادداشت (اختیاری)',
+    entryTimeLabel: 'زمان ورود',
+    exitTimeLabel: 'زمان خروج',
+    imageLabel: 'تصویر معامله (اختیاری)',
+    chooseImage: '📷 انتخاب عکس از گالری',
+    imageSelected: '✓ عکس انتخاب شد',
+    removeImage: 'حذف عکس',
+    submitTrade: 'ثبت معامله',
+    lossHint: 'برای معامله ضرر، فقط عدد ریسک رو مثبت وارد کن (مثلا ۱) — خودش به‌صورت ۱- R حساب می‌شه.',
+    tradeListTitle: 'لیست معاملات',
+    clearAll: 'پاک کردن همه',
+    noTradesYet: 'هنوز معامله‌ای ثبت نشده',
+    egCapital: 'مثلا 1000',
+    egRisk: 'مثلا 1',
+    egReward: 'مثلا 4.2',
+    winRateLabel: 'وین ریت',
+    netOutcome: 'برآیند خالص',
+    tradesRecorded: 'معامله ثبت شده',
+    avgWin: 'میانگین سود',
+    avgLoss: 'میانگین ضرر',
+    sum: 'مجموع',
+    expectancyLabel: 'Expectancy (هر معامله)',
+    expectancySub: 'میانگین بازده مورد انتظار به ازای هر معامله',
+    noMonthlyData: 'هنوز داده‌ای برای برآیند ماهانه نیست',
+    noDataFound: 'داده‌ای یافت نشد',
+    noWeeksYet: 'هنوز هیچ هفته‌ای ثبت نشده',
+    createFirstWeek: 'با دکمه پایین اولین هفته رو بساز',
+    tradesUnit: 'معامله',
+    weeksUnit: 'هفته',
+    newWeekPrompt: 'نام هفته جدید:',
+    weekLabelDefault: 'هفته',
+    keepAtLeastOneWeek: 'حداقل باید یک هفته باقی بمونه',
+    confirmDeleteWeek: (label) => `هفته «${label}» و همه معاملاتش پاک بشه؟`,
+    confirmClearTrades: 'همه معاملات این هفته پاک بشه؟',
+    invalidReward: 'لطفا ریوارد معتبر (بزرگتر از صفر) برای معامله سود وارد کن',
+    imageLoadError: 'خطا در بارگذاری عکس',
+    savedStatus: 'ذخیره شد',
+    saveError: 'خطا در ذخیره‌سازی',
+    delete: 'حذف',
+    chartEmpty: 'با ثبت اولین معامله، نمودار برآیند اینجا ظاهر می‌شه',
+    chartStart: 'شروع: 0R',
+    entry: 'ورود',
+    exit: 'خروج',
+  },
+  en: {
+    appTitle: 'Trading Journal',
+    tabWeeks: 'Weeks',
+    tabMonths: 'Monthly Outcome',
+    addWeekBtn: '+ Add New Week',
+    winRateReward: 'Win Rate & Reward',
+    win: 'TP',
+    loss: 'SL',
+    resultWin: 'TP',
+    resultLoss: 'SL',
+    riskFree: 'Free',
+    monthChartTitle: 'Monthly Outcome Chart',
+    includedWeeksTitle: 'Weeks Included This Month',
+    deleteWeek: 'Delete Week',
+    capitalTitle: 'Capital',
+    initialCapital: 'Initial Capital',
+    riskPerTrade: 'Risk per Trade (%)',
+    estimatedCapital: 'Estimated Current Capital',
+    capitalHint: 'Estimate without compounding — calculated only from total R and risk % per trade.',
+    weekChartTitle: 'Weekly Outcome Chart',
+    addTradeTitle: 'Add Trade',
+    resultLabel: 'Result',
+    directionLabel: 'Direction',
+    long: 'Long',
+    short: 'Short',
+    rewardLabel: 'Reward (R)',
+    moreDetails: 'More details (note, time, image)',
+    noteLabel: 'Note (optional)',
+    entryTimeLabel: 'Entry Time',
+    exitTimeLabel: 'Exit Time',
+    imageLabel: 'Trade Image (optional)',
+    chooseImage: '📷 Choose photo from gallery',
+    imageSelected: '✓ Photo selected',
+    removeImage: 'Remove Photo',
+    submitTrade: 'Save Trade',
+    lossHint: 'For a losing trade, just enter the risk as a positive number (e.g. 1) — it\'s automatically counted as -1R.',
+    tradeListTitle: 'Trade List',
+    clearAll: 'Clear All',
+    noTradesYet: 'No trades recorded yet',
+    egCapital: 'e.g. 1000',
+    egRisk: 'e.g. 1',
+    egReward: 'e.g. 4.2',
+    winRateLabel: 'Win Rate',
+    netOutcome: 'Net Outcome',
+    tradesRecorded: 'trades recorded',
+    avgWin: 'Avg TP',
+    avgLoss: 'Avg SL',
+    sum: 'Sum',
+    expectancyLabel: 'Expectancy (per trade)',
+    expectancySub: 'Average expected return per trade',
+    noMonthlyData: 'No data yet for a monthly outcome',
+    noDataFound: 'No data found',
+    noWeeksYet: 'No weeks recorded yet',
+    createFirstWeek: 'Use the button below to create your first week',
+    tradesUnit: 'trades',
+    weeksUnit: 'weeks',
+    newWeekPrompt: 'New week name:',
+    weekLabelDefault: 'Week',
+    keepAtLeastOneWeek: 'At least one week must remain',
+    confirmDeleteWeek: (label) => `Delete week "${label}" and all its trades?`,
+    confirmClearTrades: 'Clear all trades for this week?',
+    invalidReward: 'Please enter a valid reward (greater than zero) for a winning trade',
+    imageLoadError: 'Error loading image',
+    savedStatus: 'Saved',
+    saveError: 'Error saving',
+    delete: 'Delete',
+    chartEmpty: 'Once you log your first trade, the outcome chart will appear here',
+    chartStart: 'Start: 0R',
+    entry: 'In',
+    exit: 'Out',
+  }
+};
+
+let lang = localStorage.getItem('journal-lang') || 'fa';
+
+function t(key){
+  const v = I18N[lang][key];
+  return v === undefined ? key : v;
+}
+
+function applyStaticText(){
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+  document.body.style.fontFamily = lang === 'fa'
+    ? "'Vazirmatn', Tahoma, sans-serif"
+    : "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+  document.getElementById('langBtn').textContent = lang === 'fa' ? 'EN' : 'فا';
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = t(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
+  });
+  document.getElementById('dateNow').textContent = lang === 'fa'
+    ? new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year:'numeric', month:'long', day:'numeric' }).format(new Date())
+    : new Intl.DateTimeFormat('en-US', { year:'numeric', month:'long', day:'numeric' }).format(new Date());
+}
+
+function toggleLang(){
+  lang = lang === 'fa' ? 'en' : 'fa';
+  localStorage.setItem('journal-lang', lang);
+  applyStaticText();
+  if(document.getElementById('screen-detail').classList.contains('active')){
+    renderDetail();
+  } else if(document.getElementById('screen-month').classList.contains('active')){
+    const months = groupWeeksByMonth();
+    const m = months.find(x => x.weeks.some(w => w.id === activeMonthAnchorId));
+    activeMonthKey = m ? m.key : null;
+    document.getElementById('screenTitle').textContent = m ? m.label : t('tabMonths');
+    document.getElementById('monthTitle').textContent = m ? m.label : t('tabMonths');
+    renderMonthDetail(m);
+  } else {
+    switchTab(activeTab);
+  }
+}
+
 let weeks = [];
 let activeWeekId = null;
 let activeTab = 'weeks';
 let activeMonthKey = null;
+let activeMonthAnchorId = null;
 let backTo = 'home-weeks';
 const STORAGE_KEY = 'trading-journal-weeks';
 const OLD_STORAGE_KEY = 'trading-journal-trades';
@@ -745,11 +967,11 @@ async function loadTrades(){
     } else {
       const oldRaw = localStorage.getItem(OLD_STORAGE_KEY);
       const oldTrades = oldRaw ? JSON.parse(oldRaw) : [];
-      weeks = [{ id: uid(), label: 'هفته ۱', trades: oldTrades, capital: null, riskPct: 1, createdAt: Date.now() }];
+      weeks = [{ id: uid(), label: `${t('weekLabelDefault')} 1`, trades: oldTrades, capital: null, riskPct: 1, createdAt: Date.now() }];
     }
   }catch(e){ weeks = []; }
   if(weeks.length === 0){
-    weeks = [{ id: uid(), label: 'هفته ۱', trades: [], capital: null, riskPct: 1, createdAt: Date.now() }];
+    weeks = [{ id: uid(), label: `${t('weekLabelDefault')} 1`, trades: [], capital: null, riskPct: 1, createdAt: Date.now() }];
   }
   weeks.forEach(w => {
     if(w.capital === undefined) w.capital = null;
@@ -763,9 +985,9 @@ async function loadTrades(){
 async function saveTrades(silent){
   try{
     localStorage.setItem(STORAGE_KEY, JSON.stringify(weeks));
-    if(!silent) setStatus('ذخیره شد');
+    if(!silent) setStatus(t('savedStatus'));
   }catch(e){
-    setStatus('خطا در ذخیره‌سازی');
+    setStatus(t('saveError'));
   }
 }
 
@@ -783,7 +1005,7 @@ function goHome(tab){
   document.getElementById('screen-detail').classList.remove('active');
   document.getElementById('screen-month').classList.remove('active');
   document.getElementById('backBtn').style.display = 'none';
-  document.getElementById('screenTitle').textContent = 'ژورنال معاملاتی';
+  document.getElementById('screenTitle').textContent = t('appTitle');
   switchTab(tab || 'weeks');
 }
 
@@ -823,14 +1045,19 @@ function openWeek(id, from){
 /* ---------- months ---------- */
 function monthKeyOf(w){
   const d = new Date(w.createdAt || Date.now());
-  const parts = new Intl.DateTimeFormat('fa-IR-u-ca-persian-nu-latn', { year:'numeric', month:'2-digit' }).formatToParts(d);
-  const y = parts.find(p=>p.type==='year').value;
-  const m = parts.find(p=>p.type==='month').value;
-  return `${y}-${m}`;
+  if(lang === 'fa'){
+    const parts = new Intl.DateTimeFormat('fa-IR-u-ca-persian-nu-latn', { year:'numeric', month:'2-digit' }).formatToParts(d);
+    const y = parts.find(p=>p.type==='year').value;
+    const m = parts.find(p=>p.type==='month').value;
+    return `fa-${y}-${m}`;
+  }
+  return `en-${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
 }
 function monthLabelOf(w){
   const d = new Date(w.createdAt || Date.now());
-  return new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year:'numeric', month:'long' }).format(d);
+  return lang === 'fa'
+    ? new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year:'numeric', month:'long' }).format(d)
+    : new Intl.DateTimeFormat('en-US', { year:'numeric', month:'long' }).format(d);
 }
 
 function groupWeeksByMonth(){
@@ -847,7 +1074,7 @@ function renderMonthsList(){
   const container = document.getElementById('monthsList');
   const months = groupWeeksByMonth();
   if(months.length === 0){
-    container.innerHTML = `<div class="empty-weeks">هنوز داده‌ای برای برآیند ماهانه نیست</div>`;
+    container.innerHTML = `<div class="empty-weeks">${t('noMonthlyData')}</div>`;
     return;
   }
   container.innerHTML = months.map(m => {
@@ -858,7 +1085,7 @@ function renderMonthsList(){
     return `<div class="month-card" onclick="openMonth('${m.key}')">
       <div>
         <div class="mc-name">${m.label}</div>
-        <div class="mc-meta">${m.weeks.length} هفته &nbsp;•&nbsp; ${trades.length} معامله &nbsp;•&nbsp; وین‌ریت ${s.countable? s.winRate.toFixed(0)+'%':'—'}</div>
+        <div class="mc-meta">${m.weeks.length} ${t('weeksUnit')} &nbsp;•&nbsp; ${trades.length} ${t('tradesUnit')} &nbsp;•&nbsp; ${t('winRateLabel')} ${s.countable? s.winRate.toFixed(0)+'%':'—'}</div>
       </div>
       <div style="display:flex; align-items:center;">
         <div class="wc-net ${netClass}">${netText}</div>
@@ -878,7 +1105,8 @@ function openMonth(key){
   document.getElementById('backBtn').style.display = 'flex';
   const months = groupWeeksByMonth();
   const m = months.find(x => x.key === key);
-  const label = m ? m.label : 'برآیند ماهانه';
+  activeMonthAnchorId = m && m.weeks.length ? m.weeks[0].id : null;
+  const label = m ? m.label : t('tabMonths');
   document.getElementById('screenTitle').textContent = label;
   document.getElementById('monthTitle').textContent = label;
   renderMonthDetail(m);
@@ -887,7 +1115,7 @@ function openMonth(key){
 function renderMonthDetail(m){
   if(!m){
     document.getElementById('monthStatsGrid').innerHTML = '';
-    document.getElementById('includedWeeksList').innerHTML = `<div class="empty">داده‌ای یافت نشد</div>`;
+    document.getElementById('includedWeeksList').innerHTML = `<div class="empty">${t('noDataFound')}</div>`;
     return;
   }
   const trades = m.weeks.flatMap(w => w.trades);
@@ -913,7 +1141,7 @@ function renderMonthDetail(m){
     const netText = ws.countable===0 ? '—' : (ws.netR>=0?'+':'')+ws.netR.toFixed(2)+'R';
     return `<div class="included-week-row" onclick="openWeek('${w.id}','month')">
       <span class="iw-name">${w.label}</span>
-      <span class="iw-net" style="color:${netClass==='pos'?'var(--gold)':netClass==='neg'?'var(--loss)':'var(--text-dim)'}">${netText}</span>
+      <span class="iw-net" style="color:${netClass==='pos'?'var(--win)':netClass==='neg'?'var(--loss)':'var(--text-dim)'}">${netText}</span>
     </div>`;
   }).join('');
 }
@@ -939,7 +1167,7 @@ function computeStats(trades){
 function renderWeeksList(){
   const list = document.getElementById('weeksList');
   if(weeks.length === 0){
-    list.innerHTML = `<div class="empty-weeks">هنوز هیچ هفته‌ای ثبت نشده<br>با دکمه پایین اولین هفته رو بساز</div>`;
+    list.innerHTML = `<div class="empty-weeks">${t('noWeeksYet')}<br>${t('createFirstWeek')}</div>`;
     return;
   }
   list.innerHTML = weeks.map(w => {
@@ -949,10 +1177,11 @@ function renderWeeksList(){
     return `<div class="week-card" onclick="openWeek('${w.id}')">
       <div>
         <div class="wc-name">${w.label}</div>
-        <div class="wc-meta">${w.trades.length} معامله &nbsp;•&nbsp; وین‌ریت ${s.countable? s.winRate.toFixed(0)+'%':'—'}</div>
+        <div class="wc-meta">${w.trades.length} ${t('tradesUnit')} &nbsp;•&nbsp; ${t('winRateLabel')} ${s.countable? s.winRate.toFixed(0)+'%':'—'}</div>
       </div>
       <div style="display:flex; align-items:center;">
         <div class="wc-net ${netClass}">${netText}</div>
+        <button class="wc-del" onclick="event.stopPropagation(); deleteWeekById('${w.id}')">${t('delete')}</button>
         <div class="wc-chev">‹</div>
       </div>
     </div>`;
@@ -961,7 +1190,7 @@ function renderWeeksList(){
 
 function addWeek(){
   const n = weeks.length + 1;
-  const label = prompt('نام هفته جدید:', 'هفته ' + n);
+  const label = prompt(t('newWeekPrompt'), `${t('weekLabelDefault')} ${n}`);
   if(!label) return;
   const w = { id: uid(), label, trades: [], capital: null, riskPct: 1, createdAt: Date.now() };
   weeks.push(w);
@@ -978,12 +1207,22 @@ function renameWeek(newLabel){
 }
 
 function deleteWeek(){
-  if(weeks.length <= 1){ alert('حداقل باید یک هفته باقی بمونه'); return; }
+  if(weeks.length <= 1){ alert(t('keepAtLeastOneWeek')); return; }
   const w = activeWeek();
-  if(!confirm(`هفته «${w.label}» و همه معاملاتش پاک بشه؟`)) return;
+  if(!confirm(t('confirmDeleteWeek')(w.label))) return;
   weeks = weeks.filter(x => x.id !== w.id);
   saveTrades();
   goHome();
+}
+
+function deleteWeekById(id){
+  if(weeks.length <= 1){ alert(t('keepAtLeastOneWeek')); return; }
+  const w = weeks.find(x => x.id === id);
+  if(!w) return;
+  if(!confirm(t('confirmDeleteWeek')(w.label))) return;
+  weeks = weeks.filter(x => x.id !== id);
+  saveTrades();
+  renderWeeksList();
 }
 
 /* ---------- capital ---------- */
@@ -1010,7 +1249,8 @@ function renderCapital(){
   const risk = w.riskPct || 1;
   const growthPct = s.netR * risk;
   const now = w.capital * (1 + growthPct/100);
-  el.textContent = now.toLocaleString('fa-IR', { maximumFractionDigits: 2 }) + `  (${growthPct>=0?'+':''}${growthPct.toFixed(2)}٪)`;
+  const locale = lang === 'fa' ? 'fa-IR' : 'en-US';
+  el.textContent = now.toLocaleString(locale, { maximumFractionDigits: 2 }) + `  (${growthPct>=0?'+':''}${growthPct.toFixed(2)}%)`;
   el.className = 'cd-value ' + (growthPct>=0?'pos':'neg');
 }
 
@@ -1073,9 +1313,9 @@ async function handleImageSelect(event){
     pendingImage = await resizeImageFile(file, 900, 0.72);
     document.getElementById('imgPreviewThumb').src = pendingImage;
     document.getElementById('imgPreview').style.display = 'flex';
-    document.getElementById('imgDropText').textContent = 'عکس انتخاب شد ✓';
+    document.getElementById('imgDropText').textContent = t('imageSelected');
   }catch(e){
-    alert('خطا در بارگذاری عکس');
+    alert(t('imageLoadError'));
   }
 }
 
@@ -1083,7 +1323,7 @@ function clearImageSelect(){
   pendingImage = null;
   document.getElementById('imgInput').value = '';
   document.getElementById('imgPreview').style.display = 'none';
-  document.getElementById('imgDropText').textContent = '📷 انتخاب عکس از گالری';
+  document.getElementById('imgDropText').textContent = t('chooseImage');
 }
 
 function openLightbox(src){
@@ -1107,7 +1347,7 @@ async function addTrade(){
   let rValue = 0;
   if(result === 'win'){
     rValue = parseFloat(rInput);
-    if(isNaN(rValue) || rValue <= 0){ alert('لطفا ریوارد معتبر (بزرگتر از صفر) برای معامله سود وارد کن'); return; }
+    if(isNaN(rValue) || rValue <= 0){ alert(t('invalidReward')); return; }
   } else if(result === 'loss'){
     const risk = parseFloat(rInput);
     rValue = -(isNaN(risk) || risk <= 0 ? 1 : risk);
@@ -1138,7 +1378,7 @@ function deleteTrade(idx){
 }
 
 function resetWeekTrades(){
-  if(!confirm('همه معاملات این هفته پاک بشه؟')) return;
+  if(!confirm(t('confirmClearTrades'))) return;
   activeWeek().trades = [];
   saveTrades();
   renderDetail();
@@ -1147,14 +1387,15 @@ function resetWeekTrades(){
 function fmtTime(iso){
   if(!iso) return null;
   const d = new Date(iso);
-  return new Intl.DateTimeFormat('fa-IR', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }).format(d);
+  const locale = lang === 'fa' ? 'fa-IR-u-ca-persian' : 'en-US';
+  return new Intl.DateTimeFormat(locale, { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }).format(d);
 }
 
 /* ---------- chart ---------- */
 function renderChart(trades, wrapId){
   const wrap = document.getElementById(wrapId || 'chartWrap');
   if(trades.length === 0){
-    wrap.innerHTML = `<div class="chart-empty">با ثبت اولین معامله، نمودار برآیند اینجا ظاهر می‌شه</div>`;
+    wrap.innerHTML = `<div class="chart-empty">${t('chartEmpty')}</div>`;
     return;
   }
 
@@ -1180,7 +1421,7 @@ function renderChart(trades, wrapId){
   const areaPts = `${padX},${zeroY} ` + linePts + ` ${xFor(points.length-1).toFixed(1)},${zeroY}`;
 
   const finalV = points[points.length-1];
-  const lineColor = finalV >= 0 ? '#C9A14A' : '#B5654F';
+  const lineColor = finalV >= 0 ? '#3FC583' : '#E5544B';
 
   const dots = points.map((v,i) => {
     if(i===0) return '';
@@ -1196,7 +1437,7 @@ function renderChart(trades, wrapId){
       ${dots}
     </svg>
     <div class="chart-legend">
-      <span>شروع: 0R</span>
+      <span>${t('chartStart')}</span>
       <span style="color:${lineColor}; font-weight:700;">${finalV>=0?'+':''}${finalV.toFixed(2)}R</span>
     </div>
   `;
@@ -1204,31 +1445,32 @@ function renderChart(trades, wrapId){
 
 /* ---------- shared stats grid builder ---------- */
 function buildStatsGridHTML(s, tradeCount){
+  const ofWord = lang === 'fa' ? 'از' : 'of';
   return `
     <div class="stat">
-      <div class="label">وین ریت</div>
+      <div class="label">${t('winRateLabel')}</div>
       <div class="value ${s.winRate>=50?'pos':''}">${s.winRate.toFixed(1)}%</div>
-      <div class="sub">${s.wins.length} از ${s.countable} معامله</div>
+      <div class="sub">${s.wins.length} ${ofWord} ${s.countable} ${t('tradesUnit')}</div>
     </div>
     <div class="stat">
-      <div class="label">برآیند خالص</div>
+      <div class="label">${t('netOutcome')}</div>
       <div class="value ${s.netR>=0?'pos':'neg'}">${s.netR>=0?'+':''}${s.netR.toFixed(2)}R</div>
-      <div class="sub">${tradeCount} معامله ثبت شده</div>
+      <div class="sub">${tradeCount} ${t('tradesRecorded')}</div>
     </div>
     <div class="stat">
-      <div class="label">میانگین سود</div>
+      <div class="label">${t('avgWin')}</div>
       <div class="value pos">${s.avgWinR.toFixed(2)}R</div>
-      <div class="sub">مجموع +${s.totalWinR.toFixed(1)}R</div>
+      <div class="sub">${t('sum')} +${s.totalWinR.toFixed(1)}R</div>
     </div>
     <div class="stat">
-      <div class="label">میانگین ضرر</div>
+      <div class="label">${t('avgLoss')}</div>
       <div class="value neg">${s.avgLossR.toFixed(2)}R</div>
-      <div class="sub">مجموع -${s.totalLossR.toFixed(1)}R</div>
+      <div class="sub">${t('sum')} -${s.totalLossR.toFixed(1)}R</div>
     </div>
     <div class="stat wide">
-      <div class="label">Expectancy (هر معامله)</div>
+      <div class="label">${t('expectancyLabel')}</div>
       <div class="value ${s.expectancy>=0?'pos':'neg'}">${s.expectancy>=0?'+':''}${s.expectancy.toFixed(3)}R</div>
-      <div class="sub">میانگین بازده مورد انتظار به ازای هر معامله</div>
+      <div class="sub">${t('expectancySub')}</div>
     </div>
   `;
 }
@@ -1261,36 +1503,36 @@ function renderDetail(){
     emptyMsg.style.display = 'block';
   } else {
     emptyMsg.style.display = 'none';
-    tradeCards.innerHTML = trades.slice().reverse().map((t, revIdx) => {
+    tradeCards.innerHTML = trades.slice().reverse().map((tr, revIdx) => {
       const idx = trades.length - 1 - revIdx;
-      const labelMap = { win: 'سود', loss: 'ضرر', free: 'فری' };
-      const rDisplay = t.result === 'free' ? '—' : (t.r>=0?'+':'') + t.r.toFixed(2) + 'R';
-      const rClass = t.result === 'free' ? '' : (t.r>=0?'pos':'neg');
-      const dirBadge = t.direction === 'long' ? `<span class="badge win">لانگ</span>`
-        : t.direction === 'short' ? `<span class="badge loss">سل</span>` : '';
-      const thumb = t.image
-        ? `<img class="trade-thumb" src="${t.image}" onclick="openLightbox('${t.image}')">`
+      const labelMap = { win: t('resultWin'), loss: t('resultLoss'), free: t('riskFree') };
+      const rDisplay = tr.result === 'free' ? '—' : (tr.r>=0?'+':'') + tr.r.toFixed(2) + 'R';
+      const rClass = tr.result === 'free' ? '' : (tr.r>=0?'pos':'neg');
+      const dirBadge = tr.direction === 'long' ? `<span class="badge win">${t('long')}</span>`
+        : tr.direction === 'short' ? `<span class="badge loss">${t('short')}</span>` : '';
+      const thumb = tr.image
+        ? `<img class="trade-thumb" src="${tr.image}" onclick="openLightbox('${tr.image}')">`
         : `<div class="trade-thumb-empty"></div>`;
-      const entryStr = fmtTime(t.entryTime);
-      const exitStr = fmtTime(t.exitTime);
+      const entryStr = fmtTime(tr.entryTime);
+      const exitStr = fmtTime(tr.exitTime);
       const timesLine = (entryStr || exitStr)
-        ? `<div class="trade-times">${entryStr ? 'ورود '+entryStr : ''}${entryStr && exitStr ? ' → ' : ''}${exitStr ? 'خروج '+exitStr : ''}</div>`
+        ? `<div class="trade-times">${entryStr ? t('entry')+' '+entryStr : ''}${entryStr && exitStr ? ' → ' : ''}${exitStr ? t('exit')+' '+exitStr : ''}</div>`
         : '';
       return `<div class="trade-card">
         ${thumb}
         <div class="trade-info">
           <div class="trade-top">
             <div style="display:flex; gap:6px; align-items:center;">
-              <span class="badge ${t.result}">${labelMap[t.result]}</span>
+              <span class="badge ${tr.result}">${labelMap[tr.result]}</span>
               ${dirBadge}
             </div>
             <span class="trade-r ${rClass}">${rDisplay}</span>
           </div>
-          ${t.note ? `<div class="trade-note">${t.note}</div>` : ''}
+          ${tr.note ? `<div class="trade-note">${tr.note}</div>` : ''}
           ${timesLine}
         </div>
         <div class="trade-actions">
-          <button class="del" onclick="deleteTrade(${idx})">حذف</button>
+          <button class="del" onclick="deleteTrade(${idx})">${t('delete')}</button>
         </div>
       </div>`;
     }).join('');
@@ -1300,8 +1542,7 @@ function renderDetail(){
   renderCapital();
 }
 
-document.getElementById('dateNow').textContent = new Intl.DateTimeFormat('fa-IR', { year:'numeric', month:'long', day:'numeric' }).format(new Date());
-
+applyStaticText();
 loadTrades();
 resetTradeForm();
 
@@ -1314,3 +1555,4 @@ if('serviceWorker' in navigator){
 
 </body>
 </html>
+
